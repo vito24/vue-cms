@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/page/Hello'
+import Home from '@/components/page/Home'
 import ProductList from '@/components/page/ProductList'
 
-Vue.use(Router)
+import ViSidebar from '@/components/common/Sidebar'
+
+Vue.use(Router);
 
 export default new Router({
 	routes: [
@@ -12,12 +14,18 @@ export default new Router({
 			redirect: '/home'
 		}, {
 			path: '/home',
-			name: 'Hello',
-			component: Hello
+			name: 'home',
+			components: {
+                sidebar: ViSidebar,
+                default: Home
+            }
 		}, {
 			path: '/product-list',
-			name: 'ProductList',
-			component: ProductList
+			name: 'productList',
+            components: {
+                sidebar: ViSidebar,
+                default: ProductList
+            }
 		}
 	]
 })

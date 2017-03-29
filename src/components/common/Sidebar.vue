@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<el-menu 
-			default-active="2" 
-			class="el-menu-vertical-demo sidebar" 
-			@open="handleOpen" 
-			@close="handleClose" 
+		<el-menu
+			default-active="product-list"
+			class="el-menu-vertical-demo sidebar"
+			@open="handleOpen"
+			@close="handleClose"
 			theme="dark"
 			router>
 			<el-submenu index="1">
@@ -38,7 +38,10 @@
 				activeIndex: '1'
 			}
 		},
-		methods: {
+        props: [
+            'sidebarData'
+        ],
+        methods: {
 			handleOpen(key, keyPath) {
 				console.log(key, keyPath);
 			},
@@ -46,5 +49,9 @@
 				console.log(key, keyPath);
 			}
 		},
+        mounted () {
+		    console.log('sidebarData', this.sidebarData)
+        },
+
 	}
 </script>
