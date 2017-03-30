@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<vi-header></vi-header>
-        <router-view name="sidebar" :sidebarData="sidebarData"></router-view>
+        <router-view name="sidebar"></router-view>
 		<router-view class="content"></router-view>
 	</div>
 </template>
@@ -12,45 +12,12 @@
 		name: 'app',
 		data () {
 		    return {
-		        sideBars: {
-                    productList: [
-                        {
-                            index: 2,
-                            title: '货物分类'
-                        }, {
-                            index: 3,
-                            title: '货物管理'
-                        }
-                    ],
-                    home: [
-                        {
-                            index: 1,
-                            title: '首页1'
-                        }, {
-                            index: 2,
-                            title: '首页2'
-                        }
-                    ]
-                }
+
             }
         },
 		components: {
 			ViHeader
-		},
-        computed: {
-            sidebarData () {
-                return this.sideBars[this.$route.name]
-            }
-        },
-        watch: {
-            $route (newRoute, oldRoute) {
-                const routeName = newRoute.name;
-                if (this.sideBars[this.$route.name]) {
-                    this.sidebarData = this.sideBars[this.$route.name];
-                }
-                console.log(999, routeName)
-            }
-        }
+		}
 	}
 </script>
 
