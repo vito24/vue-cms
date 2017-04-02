@@ -11,16 +11,29 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			redirect: '/home'
+			redirect: '/home/home1'
 		}, {
-			path: '/home',
-			name: 'home',
+            path: '/home',
+            redirect: '/home/home1'
+        }, {
+			path: '/home/home1',
+			name: 'home1',
 			components: {
                 sidebar: ViSidebar,
                 default: Home
             }
 		}, {
-			path: '/product-list',
+            path: '/home/home2',
+            name: 'home2',
+            components: {
+                sidebar: ViSidebar,
+                default: Home
+            }
+        }, {
+            path: '/product',
+            redirect: '/product/product-list'
+        }, {
+			path: '/product/product-list',
 			name: 'productList',
             components: {
                 sidebar: ViSidebar,

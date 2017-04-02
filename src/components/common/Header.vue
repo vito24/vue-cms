@@ -2,14 +2,14 @@
 	<div class="header">
 		<el-menu
 			theme="dark"
-			default-active="home"
+			:default-active="curActive"
 			class="el-menu-demo"
 			mode="horizontal"
 			@select="handleSelect"
 			router>
 			<div class="logo">BOSS</div>
-			<el-menu-item index="home">首页</el-menu-item>
-			<el-menu-item index="product-list">商品</el-menu-item>
+			<el-menu-item index="/home">首页</el-menu-item>
+			<el-menu-item index="/product">商品</el-menu-item>
 		</el-menu>
 	</div>
 </template>
@@ -26,7 +26,13 @@
 			handleSelect(key, keyPath) {
 				console.log(key, keyPath);
 			}
-		}
+		},
+        computed: {
+            curActive () {
+                const module = this.$route.path.split('/')[1];
+                return `/${module}`;
+            }
+        }
 	}
 </script>
 

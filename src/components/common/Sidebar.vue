@@ -1,7 +1,7 @@
 <template>
 	<div>
         <el-menu
-            :default-active="$route.name"
+            :default-active="curSidebar"
             class="el-menu-vertical-demo sidebar"
             @open="handleOpen"
             @close="handleClose"
@@ -14,12 +14,14 @@
                     <el-menu-item
                         v-for="(second, index) in first.children"
                         :index="second.index"
+                        :class="curSidebar === second.index ? 'is-active' : ''"
                         :key="index">
                         {{second.name}}
                     </el-menu-item>
                 </el-submenu>
                 <el-menu-item
                     :index="first.index"
+                    :class="curSidebar === first.index ? 'is-active' : ''"
                     v-else>
                     {{first.name}}
                 </el-menu-item>
@@ -43,13 +45,13 @@
 </style>
 <script>
     const sideBars = {
-        productList: [
+        product: [
             {
                 index: '1',
                 name: '商品管理',
                 children: [
                     {
-                        index: 'product-list',
+                        index: '/product/product-list',
                         name: '所有商品'
                     }, {
                         index: '1-2',
@@ -66,10 +68,10 @@
         ],
         home: [
             {
-                index: 'home',
+                index: '/home/home1',
                 name: '首页1'
             }, {
-                index: 'home2',
+                index: '/home/home2',
                 name: '首页2'
             }
         ]
@@ -77,7 +79,7 @@
 	export default{
 		data () {
 			return {
-                sidebarData: sideBars[this.$route.name]
+                curSidebar: this.$route.path
 			}
 		},
         methods: {
@@ -88,12 +90,17 @@
 				console.log(key, keyPath);
 			}
 		},
+        computed: {
+            sidebarData () {
+                const moudule = this.$route.path.split('/')[1];
+                return sideBars[moudule];
+            }
+        },
         watch: {
             $route (newRoute, oldRoute) {
-                const routeName = newRoute.name;
-                if (sideBars[routeName]) {
-                    this.sidebarData = sideBars[routeName];
-                }
+                const module = newRoute.path.split('/')[1];
+                this.sidebarData = sideBars[module];
+                this.curSidebar = newRoute.path;
             }
         }
 	}
