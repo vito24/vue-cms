@@ -1,13 +1,14 @@
 <template>
 	<div id="app">
 		<vi-header></vi-header>
-        <router-view name="sidebar"></router-view>
+        <vi-sidebar></vi-sidebar>
 		<router-view class="content"></router-view>
 	</div>
 </template>
 
 <script>
 	import ViHeader from './components/common/Header'
+    import ViSidebar from './components/common/Sidebar'
 	export default {
 		name: 'app',
 		data () {
@@ -16,7 +17,8 @@
             }
         },
 		components: {
-			ViHeader
+			ViHeader,
+            ViSidebar
 		}
 	}
 </script>

@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Home from '@/components/page/Home'
 import ProductList from '@/components/page/ProductList'
 
-import ViSidebar from '@/components/common/Sidebar'
-
 Vue.use(Router);
 
 export default new Router({
@@ -18,27 +16,18 @@ export default new Router({
         }, {
 			path: '/home/home1',
 			name: 'home1',
-			components: {
-                sidebar: ViSidebar,
-                default: Home
-            }
+			component: Home
 		}, {
             path: '/home/home2',
             name: 'home2',
-            components: {
-                sidebar: ViSidebar,
-                default: Home
-            }
+            component: Home
         }, {
             path: '/product',
             redirect: '/product/product-list'
         }, {
 			path: '/product/product-list',
 			name: 'productList',
-            components: {
-                sidebar: ViSidebar,
-                default: ProductList
-            }
+            component: ProductList
 		}
 	]
 })
