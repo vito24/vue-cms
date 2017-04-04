@@ -1,20 +1,30 @@
 <template>
 	<div>
-		<el-menu 
-			default-active="2" 
-			class="el-menu-vertical-demo sidebar" 
-			@open="handleOpen" 
-			@close="handleClose" 
-			theme="dark"
-			router>
-			<el-submenu index="1">
-				<template slot="title">商品管理</template>
-				<el-menu-item index="product-list">所有商品</el-menu-item>
-				<el-menu-item index="product-draft-list">草稿箱</el-menu-item>
-			</el-submenu>
-			<el-menu-item index="2">货物分类</el-menu-item>
-			<el-menu-item index="3">货物管理</el-menu-item>
-		</el-menu>
+        <el-menu
+            :default-active="curSidebar"
+            class="el-menu-vertical-demo sidebar"
+            theme="dark"
+            router>
+            <template
+                v-for="first in sidebarData">
+                <el-submenu :index="first.index" v-if="first.children">
+                    <template slot="title">{{first.name}}</template>
+                    <el-menu-item
+                        v-for="(second, index) in first.children"
+                        :index="second.index"
+                        :class="curSidebar === second.index ? 'is-active' : ''"
+                        :key="index">
+                        {{second.name}}
+                    </el-menu-item>
+                </el-submenu>
+                <el-menu-item
+                    :index="first.index"
+                    :class="curSidebar === first.index ? 'is-active' : ''"
+                    v-else>
+                    {{first.name}}
+                </el-menu-item>
+            </template>
+        </el-menu>
 	</div>
 </template>
 <style scoped>
@@ -32,19 +42,26 @@
 	}
 </style>
 <script>
+    import sideBars from '@/router/sidebar'
 	export default{
+        name: 'sidebar',
 		data () {
 			return {
-				activeIndex: '1'
+                curSidebar: this.$route.path
 			}
 		},
-		methods: {
-			handleOpen(key, keyPath) {
-				console.log(key, keyPath);
-			},
-			handleClose(key, keyPath) {
-				console.log(key, keyPath);
-			}
-		},
+        computed: {
+            sidebarData () {
+                const moudule = this.$route.path.split('/')[1];
+                return sideBars[moudule];
+            }
+        },
+        watch: {
+            $route (newRoute, oldRoute) {
+                const module = newRoute.path.split('/')[1];
+                this.sidebarData = sideBars[module];
+                this.curSidebar = newRoute.path;
+            }
+        }
 	}
 </script>

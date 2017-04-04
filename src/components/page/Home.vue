@@ -1,5 +1,8 @@
 <template>
 	<div class="hello">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>首页</el-breadcrumb-item>
+        </el-breadcrumb>
 		<h1>{{ msg }}</h1>
 	</div>
 </template>
