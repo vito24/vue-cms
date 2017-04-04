@@ -5,7 +5,6 @@
 			:default-active="curActive"
 			class="el-menu-demo"
 			mode="horizontal"
-			@select="handleSelect"
 			router>
 			<div class="logo">BOSS</div>
 			<el-menu-item index="/home">首页</el-menu-item>
@@ -20,11 +19,6 @@
 		data () {
 			return {
 
-			}
-		},
-		methods: {
-			handleSelect(key, keyPath) {
-				console.log(key, keyPath);
 			}
 		},
         computed: {

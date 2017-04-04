@@ -3,8 +3,6 @@
         <el-menu
             :default-active="curSidebar"
             class="el-menu-vertical-demo sidebar"
-            @open="handleOpen"
-            @close="handleClose"
             theme="dark"
             router>
             <template
@@ -46,17 +44,10 @@
 <script>
     import sideBars from '@/router/sidebar'
 	export default{
+        name: 'sidebar',
 		data () {
 			return {
                 curSidebar: this.$route.path
-			}
-		},
-        methods: {
-			handleOpen(key, keyPath) {
-				console.log(key, keyPath);
-			},
-			handleClose(key, keyPath) {
-				console.log(key, keyPath);
 			}
 		},
         computed: {

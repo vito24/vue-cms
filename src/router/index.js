@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/page/Home'
+import Home1 from '@/components/page/Home1'
 import ProductList from '@/components/page/ProductList'
 
 Vue.use(Router);
+
+const Parent = {
+    template: '<router-view></router-view>'
+};
 
 export default new Router({
 	routes: [
@@ -11,23 +15,32 @@ export default new Router({
 			path: '/',
 			redirect: '/home/home1'
 		}, {
-            path: '/home',
-            redirect: '/home/home1'
-        }, {
-			path: '/home/home1',
-			name: 'home1',
-			component: Home
-		}, {
-            path: '/home/home2',
-            name: 'home2',
-            component: Home
+	        path: '/home',
+            component: Parent,
+            children: [
+                {
+                    path: '/',
+                    redirect: '/home/home1'
+                }, {
+                    path: 'home1',
+                    component: Home1
+                }, {
+                    path: 'home2',
+                    component: Home1
+                }
+            ]
         }, {
             path: '/product',
-            redirect: '/product/product-list'
-        }, {
-			path: '/product/product-list',
-			name: 'productList',
-            component: ProductList
-		}
+            component: Parent,
+            children: [
+                {
+                    path: '/',
+                    redirect: '/product/product-list'
+                }, {
+                    path: 'product-list',
+                    component: ProductList
+                }
+            ]
+        }
 	]
 })
