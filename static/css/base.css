@@ -52,9 +52,29 @@ ul {
     list-style: none;
 }
 
+.tr {
+    text-align: right;
+}
+.tl {
+    text-align: left;
+}
+.tc {
+    text-align: center;
+}
+
 .ml10 {
 	margin-left: 10px;
 }
 .ml20 {
 	margin-left: 20px;
+}
+
+.pt10 {
+    padding-top: 10px;
+}
+.pt20 {
+    padding-top: 20px;
+}
+.pt50 {
+    padding-top: 50px;
 }
