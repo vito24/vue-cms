@@ -29,7 +29,7 @@
 </template>
 <style scoped>
 	.sidebar {
-		width: 250px;
+		width: 230px;
 		display: block;
 		position: absolute;
 		top: 60px;

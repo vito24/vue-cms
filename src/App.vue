@@ -37,11 +37,12 @@
 	}
 	.content {
 		position: absolute;
-		left: 250px;
+		left: 230px;
 		bottom: 0;
 		right: 0;
 		top: 60px;
-		padding: 40px;
+		padding: 30px;
 		width: auto;
+        overflow-x: auto;
 	}
 </style>
