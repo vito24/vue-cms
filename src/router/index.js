@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Home from '@/components/page/Home'
-import ProductList from '@/components/page/ProductList'
+import ProductList from '@/components/page/product/ProductList'
+import ProductNew from '@/components/page/product/ProductNew'
 
 Vue.use(Router);
 
@@ -39,6 +41,9 @@ export default new Router({
                 }, {
                     path: 'product-list',
                     component: ProductList
+                }, {
+                    path: 'product-new',
+                    component: ProductNew
                 }
             ]
         }

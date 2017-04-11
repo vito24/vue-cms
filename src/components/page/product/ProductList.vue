@@ -1,11 +1,11 @@
 <template>
-	<div class="product-list">
-		<el-breadcrumb separator="/">
-			<el-breadcrumb-item>商品</el-breadcrumb-item>
-			<el-breadcrumb-item>商品管理</el-breadcrumb-item>
-			<el-breadcrumb-item>所有商品</el-breadcrumb-item>
-		</el-breadcrumb>
-		<div class="pt10">
+    <div class="product-list">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>商品</el-breadcrumb-item>
+            <el-breadcrumb-item>商品管理</el-breadcrumb-item>
+            <el-breadcrumb-item>所有商品</el-breadcrumb-item>
+        </el-breadcrumb>
+        <div class="pt10">
             <el-form>
                 <el-row :gutter="24">
                     <el-col :span="6">
@@ -52,15 +52,17 @@
                 <el-row :gutter="24">
                     <el-col :span="24" class="tr">
                         <el-form-item>
-                            <el-button type="primary">新增商品</el-button>
+                            <a href="#/product/product-new">
+                                <el-button type="primary">新增商品</el-button>
+                            </a>
                         </el-form-item>
                     </el-col>
                 </el-row>
             </el-form>
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="全部" name="first"></el-tab-pane>
-                <el-tab-pane label="已上架" name="second"></el-tab-pane>
-                <el-tab-pane label="已下架" name="third"></el-tab-pane>
+                <el-tab-pane label="全部" name="all"></el-tab-pane>
+                <el-tab-pane label="已上架" name="up"></el-tab-pane>
+                <el-tab-pane label="已下架" name="down"></el-tab-pane>
             </el-tabs>
             <el-table
                 :data="tableData"
@@ -120,15 +122,15 @@
                     </template>
                 </el-table-column>
             </el-table>
-		</div>
-	</div>
+        </div>
+    </div>
 </template>
 
 <script>
-	export default {
+    export default {
         data () {
-	        return {
-	            searchDetail: {
+            return {
+                searchDetail: {
                     brand: ''
                 },
                 options: [
@@ -143,7 +145,7 @@
                         label: '格力'
                     }
                 ],
-                activeName: 'second',
+                activeName: 'up',
                 tableData: [{
                     spuId: '123',
                     name: '【兴利 璞极】格适-L3',
@@ -163,7 +165,7 @@
             }
         },
         methods: {
-		    reset () {
+            reset () {
                 this.searchDetail = {};
             },
             search () {
@@ -179,7 +181,7 @@
                 console.log(index, row);
             }
         }
-	}
+    }
 </script>
 
 <style scoped>

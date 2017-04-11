@@ -27,10 +27,10 @@ const sideBars = {
     home: [
         {
             index: '/home/home1',
-            name: '首页1'
+            name: '概况'
         }, {
             index: '/home/home2',
-            name: '首页2'
+            name: '意见反馈'
         }
     ]
 };
