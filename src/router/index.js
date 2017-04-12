@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '@/components/page/Home'
-import ProductList from '@/components/page/product/ProductList'
-import ProductNew from '@/components/page/product/ProductNew'
+//首页
+import Home from '@/components/page/Home';
+
+//商品
+import ProductList from '@/components/page/product/ProductList' //所有商品
+import ProductNew from '@/components/page/product/ProductNew'  //新增商品
+import CargoCategoryManage from '@/components/page/product/CargoCategoryManage' //货物分类
+import CargoManage from '@/components/page/product/CargoManage'  //货物管理
+import CargoAdd from '@/components/page/product/CargoAdd'  //新增货物
 
 Vue.use(Router);
 
@@ -12,22 +18,22 @@ const Parent = {
 };
 
 export default new Router({
-	routes: [
-		{
-			path: '/',
-			redirect: '/home/home1'
-		}, {
-	        path: '/home',
+    routes: [
+        {
+            path: '/',
+            redirect: '/home/home1'
+        }, {
+            path: '/home',
             component: Parent,
             children: [
                 {
                     path: '/',
-                    redirect: '/home/home1'
+                    redirect: '/home/index'
                 }, {
-                    path: 'home1',
+                    path: 'index',
                     component: Home
                 }, {
-                    path: 'home2',
+                    path: 'feedbacks',
                     component: Home
                 }
             ]
@@ -44,8 +50,17 @@ export default new Router({
                 }, {
                     path: 'product-new',
                     component: ProductNew
+                }, {
+                    path: 'cargo-category-manage',
+                    component: CargoCategoryManage
+                }, {
+                    path: 'cargo-manage',
+                    component: CargoManage
+                }, {
+                    path: 'cargo-add',
+                    component: CargoAdd
                 }
             ]
         }
-	]
+    ]
 })

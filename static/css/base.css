@@ -78,3 +78,10 @@ ul {
 .pt50 {
     padding-top: 50px;
 }
+
+/**
+elementUI
+ */
+.el-table .cell {
+    text-align: center;
+}

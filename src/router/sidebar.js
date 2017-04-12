@@ -17,19 +17,19 @@ const sideBars = {
                 }
             ]
         }, {
-            index: '2',
+            index: '/product/cargo-category-manage',
             name: '货物分类'
         }, {
-            index: '3',
+            index: '/product/cargo-manage',
             name: '货物管理'
         }
     ],
     home: [
         {
-            index: '/home/home1',
+            index: '/home/index',
             name: '概况'
         }, {
-            index: '/home/home2',
+            index: '/home/feedbacks',
             name: '意见反馈'
         }
     ]
