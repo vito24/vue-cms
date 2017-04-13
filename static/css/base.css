@@ -80,8 +80,12 @@ ul {
 }
 
 /**
-elementUI
+elementUI enhance
  */
 .el-table .cell {
     text-align: center;
+}
+.el-pagination {
+    text-align: right;
+    padding: 20px 0;
 }

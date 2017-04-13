@@ -76,7 +76,7 @@
                 </el-row>
             </el-form>
             <el-table
-                :data="cargoList"
+                :data="cargoDetails.list"
                 border
                 style="width: 100%">
                 <el-table-column
@@ -154,6 +154,14 @@
                     </template>
                 </el-table-column>
             </el-table>
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="cargoDetails.pageNo"
+                :page-size="cargoDetails.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="cargoDetails.count">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -166,13 +174,15 @@
                     categoryId: [],
                     supplierId: null
                 },
-                cargoList: [],
+                cargoDetails: [],
                 ccSelectList: [],
                 supplierList: [],
                 props: {
                     value: 'id',
                     label: 'name'
-                }
+                },
+                pageNo: 1,
+                pageSize: 30
             }
         },
         computed: {
@@ -193,6 +203,14 @@
             },
             handleDelete () {
 
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+                this.pageSize = val;
+            },
+            handleCurrentChange(val) {
+                this.pageNo = val;
+                console.log(`当前页: ${val}`);
             }
         },
         mounted () {
@@ -217,10 +235,10 @@
 
             //获取货物列表
             this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
-                pageNo: 1,
-                pageSize: 30
+                pageNo: this.pageNo,
+                pageSize: this.pageSize
             }).then(response => {
-                this.cargoList = response.data.obj.list;
+                this.cargoDetails = response.data.obj;
             }).catch(error => {
                 throw new Error(error);
             });
