@@ -14,14 +14,14 @@
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="分类" label-width="80px">
-                            <el-select placeholder="请选择" v-model="searchDetail.categoryId">
-                                <el-option
-                                    :value="item.value"
-                                    v-for="item in ccSelectList"
-                                    :label="item.label"
-                                    :key="item.value">
-                                </el-option>
-                            </el-select>
+                            <el-cascader
+                                placeholder="请选择"
+                                v-model="searchDetail.categoryId"
+                                :options="ccSelectList"
+                                filterable
+                                :props="props"
+                                change-on-select>
+                            </el-cascader>
                         </el-form-item>
                     </el-col>
                     <el-col :span="6">
@@ -31,12 +31,12 @@
                     </el-col>
                     <el-col :span="6">
                         <el-form-item label="供应商" label-width="80px">
-                            <el-select placeholder="请选择" v-model="searchDetail.brand">
+                            <el-select placeholder="请选择" v-model="searchDetail.supplierId">
                                 <el-option
-                                    :value="item.value"
+                                    :value="item.suppliersId"
                                     v-for="item in supplierList"
-                                    :label="item.label"
-                                    :key="item.value">
+                                    :label="item.name"
+                                    :key="item.suppliersId">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -104,14 +104,14 @@
                     label="分类"
                     width="140">
                     <template scope="scope">
-                        <span>{{ scope.row.brandName }}</span>
+                        <span>{{ scope.row.categoryId }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
                     label="供应商"
                     width="120">
                     <template scope="scope">
-                        <span>{{ scope.row.date }}</span>
+                        <span>{{ scope.row.supplierId }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column
@@ -163,11 +163,16 @@
         data () {
             return {
                 searchDetail: {
-
+                    categoryId: [],
+                    supplierId: null
                 },
                 cargoList: [],
                 ccSelectList: [],
-                supplierList: []
+                supplierList: [],
+                props: {
+                    value: 'id',
+                    label: 'name'
+                }
             }
         },
         computed: {
@@ -175,10 +180,13 @@
         },
         methods: {
             search () {
-
+                console.log('searchDetail', this.searchDetail)
             },
             reset () {
-
+                this.searchDetail = {
+                    categoryId: [],
+                    supplierId: null
+                };
             },
             handleEdit () {
 
@@ -188,8 +196,17 @@
             }
         },
         mounted () {
+            //获取分类
+            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
+                parentId: 0,
+            }).then(response => {
+                this.ccSelectList = response.data.obj.cargoCategoryVoList;
+            }).catch(error => {
+                throw new Error(error);
+            });
+
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/1.0.0/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
+            this.$http.post('/api/supplier/querySuppliers/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
                 pageNo: 1,
                 pageSize: 10000
             }).then(response => {

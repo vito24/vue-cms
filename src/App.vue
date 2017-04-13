@@ -41,7 +41,7 @@
 		bottom: 0;
 		right: 0;
 		top: 60px;
-		padding: 30px;
+		padding: 20px;
 		width: auto;
         overflow-x: auto;
 	}
