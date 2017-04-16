@@ -167,6 +167,7 @@
 </template>
 
 <script>
+    import { mapState, mapMutations, mapActions } from 'vuex'
     export default {
         data () {
             return {
@@ -186,11 +187,27 @@
             }
         },
         computed: {
-
+//            ...mapState([
+//                'count'
+//            ]),
+//            test () {
+//                return this.count;
+//            }
         },
         methods: {
+//            ...mapMutations([
+//                'INCREMENT'
+//            ]),
+            ...mapActions([
+               'add'
+            ]),
             search () {
                 console.log('searchDetail', this.searchDetail)
+//                this.INCREMENT()
+//                this.add()
+//                this.$store.dispatch('add').then(() => {
+//
+//                });
             },
             reset () {
                 this.searchDetail = {
@@ -215,7 +232,7 @@
         },
         mounted () {
             //获取分类
-            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
+            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/DFCEC5C57FDF8FACCD342B239064C8A4', {
                 parentId: 0,
             }).then(response => {
                 this.ccSelectList = response.data.obj.cargoCategoryVoList;
@@ -224,7 +241,7 @@
             });
 
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
+            this.$http.post('/api/supplier/querySuppliers/458/DFCEC5C57FDF8FACCD342B239064C8A4', {
                 pageNo: 1,
                 pageSize: 10000
             }).then(response => {
@@ -234,7 +251,7 @@
             });
 
             //获取货物列表
-            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/6F1EFCAE82A010AC1C82D701B7FDAB9B', {
+            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/DFCEC5C57FDF8FACCD342B239064C8A4', {
                 pageNo: this.pageNo,
                 pageSize: this.pageSize
             }).then(response => {

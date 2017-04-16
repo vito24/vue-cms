@@ -3,8 +3,9 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './actions'
-import * as getters from './getters'
+import actions from './actions'
+import getters from './getters'
+import mutations from './mutations'
 // import products from './modules/products'
 
 Vue.use(Vuex);
@@ -12,7 +13,11 @@ Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
+    state: {
+        count: 10
+    },
     actions,
     getters,
+    mutations,
     strict: debug
 })
