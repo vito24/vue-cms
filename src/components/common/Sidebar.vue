@@ -1,30 +1,33 @@
 <template>
-	<div>
-        <el-menu
-            :default-active="curSidebar"
-            class="el-menu-vertical-demo sidebar"
+	<div class="sidebar">
+        <Menu
             theme="dark"
-            router>
-            <template
-                v-for="first in sidebarData">
-                <el-submenu :index="first.index" v-if="first.children">
-                    <template slot="title">{{first.name}}</template>
-                    <el-menu-item
+            :active-name="curSidebar"
+            width="auto"
+            :open-names="['product']"
+            @on-select="routeTo">
+            <template v-for="first in sidebarData">
+                <Submenu name="product" v-if="first.children">
+                    <template slot="title">
+                        <Icon type="ios-navigate"></Icon>
+                        {{first.name}}
+                    </template>
+                    <Menu-item
                         v-for="(second, index) in first.children"
-                        :index="second.index"
-                        :class="curSidebar === second.index ? 'is-active' : ''"
+                        :name="second.index"
+                        :class="curSidebar === second.index ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
                         :key="index">
                         {{second.name}}
-                    </el-menu-item>
-                </el-submenu>
-                <el-menu-item
-                    :index="first.index"
-                    :class="curSidebar === first.index ? 'is-active' : ''"
+                    </Menu-item>
+                </Submenu>
+                <Menu-item
+                    :name="first.index"
+                    :class="curSidebar === first.index ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
                     v-else>
                     {{first.name}}
-                </el-menu-item>
+                </Menu-item>
             </template>
-        </el-menu>
+        </Menu>
 	</div>
 </template>
 <style scoped>
@@ -37,9 +40,6 @@
 		left: 0;
 		background: #2e363f;
 	}
-	.el-menu {
-		border-radius: 0;
-	}
 </style>
 <script>
     import sideBars from '@/router/sidebar'
@@ -50,6 +50,11 @@
                 curSidebar: this.$route.path
 			}
 		},
+        methods: {
+            routeTo (e) {
+                this.$router.push(e);
+            }
+        },
         computed: {
             sidebarData () {
                 const moudule = this.$route.path.split('/')[1];
