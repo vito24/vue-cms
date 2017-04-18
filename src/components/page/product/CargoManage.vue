@@ -1,9 +1,9 @@
 <template>
     <div>
-        <el-breadcrumb separator="/">
-            <el-breadcrumb-item>商品</el-breadcrumb-item>
-            <el-breadcrumb-item>货物管理</el-breadcrumb-item>
-        </el-breadcrumb>
+        <Breadcrumb>
+            <Breadcrumb-item>商品</Breadcrumb-item>
+            <Breadcrumb-item>货物管理</Breadcrumb-item>
+        </Breadcrumb>
         <div class="pt10">
             <el-form>
                 <el-row :gutter="24">

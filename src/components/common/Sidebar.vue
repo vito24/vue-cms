@@ -30,17 +30,7 @@
         </Menu>
 	</div>
 </template>
-<style scoped>
-	.sidebar {
-		width: 230px;
-		display: block;
-		position: absolute;
-		top: 60px;
-		bottom: 0;
-		left: 0;
-		background: #2e363f;
-	}
-</style>
+
 <script>
     import sideBars from '@/router/sidebar'
 	export default{
@@ -70,3 +60,19 @@
         }
 	}
 </script>
+
+<style scoped>
+    .sidebar {
+        width: 230px;
+        display: block;
+        position: absolute;
+        top: 70px;
+        bottom: 10px;
+        left: 10px;
+        background: #2e363f;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {
+        border-right: 3px solid #39f;
+    }
+</style>

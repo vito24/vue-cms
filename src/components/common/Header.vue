@@ -1,7 +1,6 @@
 <template>
 	<div class="header">
         <Menu mode="horizontal" theme="dark" :active-name="curActive" @on-select="routeTo">
-            <div class="layout-logo"></div>
             <div class="layout-nav">
                 <Menu-item name="/home">
                     <Icon type="ios-navigate"></Icon>
@@ -13,16 +12,6 @@
                 </Menu-item>
             </div>
         </Menu>
-		<!--<el-menu-->
-			<!--theme="dark"-->
-			<!--:default-active="curActive"-->
-			<!--class="el-menu-demo"-->
-			<!--mode="horizontal"-->
-			<!--router>-->
-			<!--<div class="logo">BOSS</div>-->
-			<!--<el-menu-item index="/home">首页</el-menu-item>-->
-			<!--<el-menu-item index="/product">商品</el-menu-item>-->
-		<!--</el-menu>-->
 	</div>
 </template>
 
@@ -49,15 +38,8 @@
 </script>
 
 <style scoped>
-    .layout-logo{
-        width: 100px;
-        height: 30px;
-        background: #5b6270;
-        border-radius: 3px;
-        float: left;
-        position: relative;
-        top: 15px;
-        left: 20px;
+    .header .ivu-menu-dark {
+        background: #2e363f;
     }
     .layout-nav{
         width: 420px;

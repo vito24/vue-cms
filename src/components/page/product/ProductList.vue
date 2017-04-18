@@ -1,10 +1,10 @@
 <template>
     <div class="product-list">
-        <el-breadcrumb separator="/">
-            <el-breadcrumb-item>商品</el-breadcrumb-item>
-            <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-            <el-breadcrumb-item>所有商品</el-breadcrumb-item>
-        </el-breadcrumb>
+        <Breadcrumb>
+            <Breadcrumb-item>商品</Breadcrumb-item>
+            <Breadcrumb-item>商品管理</Breadcrumb-item>
+            <Breadcrumb-item>所有商品</Breadcrumb-item>
+        </Breadcrumb>
         <div class="pt10">
             <el-form>
                 <el-row :gutter="24">
