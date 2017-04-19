@@ -2,7 +2,9 @@
 	<div id="app">
 		<vi-header></vi-header>
         <vi-sidebar></vi-sidebar>
-        <router-view class="content"></router-view>
+        <div class="wrapper">
+            <router-view class="content"></router-view>
+        </div>
 	</div>
 </template>
 
@@ -36,15 +38,20 @@
 		color: #2c3e50;
         background-color: #eee;
 	}
-	.content {
+	.wrapper {
 		position: absolute;
 		left: 250px;
 		bottom: 10px;
-		right: 10px;
+		right: 0;
 		top: 70px;
-		padding: 20px;
 		width: auto;
         overflow-x: auto;
-        background-color: #fff;
+        border-radius: 5px;
 	}
+    .content {
+        min-height: 100%;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
 </style>

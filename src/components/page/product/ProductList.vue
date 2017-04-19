@@ -6,64 +6,64 @@
             <Breadcrumb-item>所有商品</Breadcrumb-item>
         </Breadcrumb>
         <div class="pt10">
-            <el-form>
-                <el-row :gutter="24">
-                    <el-col :span="6">
-                        <el-form-item label="商品名称" label-width="80px">
-                            <el-input placeholder="请输入商品名称" v-model="searchDetail.productName"></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item label="厂家型号" label-width="80px">
-                            <el-input placeholder="请输入厂家型号" v-model="searchDetail.factorySerial"></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item label="SPU编号" label-width="80px">
-                            <el-input placeholder="请输入SPU编号" v-model="searchDetail.spuId"></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-form-item label="SKU编号" label-width="80px">
-                            <el-input placeholder="请输入SKU编号" v-model="searchDetail.skuId"></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="24">
-                    <el-col :span="6">
-                        <el-form-item label="品牌&系列" label-width="80px">
-                            <el-select placeholder="请选择" v-model="searchDetail.brand">
-                                <el-option
+            <Form>
+                <Row :gutter="24">
+                    <Col span="6">
+                        <Form-item label="商品名称" :label-width="80">
+                            <Input placeholder="请输入商品名称" v-model="searchDetail.productName"></Input>
+                        </Form-item>
+                    </Col>
+                    <Col span="6">
+                        <Form-item label="厂家型号" :label-width="80">
+                            <Input placeholder="请输入厂家型号" v-model="searchDetail.factorySerial"></Input>
+                        </Form-item>
+                    </Col>
+                    <Col span="6">
+                        <Form-item label="SPU编号" :label-width="80">
+                            <Input placeholder="请输入SPU编号" v-model="searchDetail.spuId"></Input>
+                        </Form-item>
+                    </Col>
+                    <Col span="6">
+                        <Form-item label="SKU编号" :label-width="80">
+                            <Input placeholder="请输入SKU编号" v-model="searchDetail.skuId"></Input>
+                        </Form-item>
+                    </Col>
+                </Row>
+                <Row :gutter="24">
+                    <Col span="6">
+                        <Form-item label="品牌&系列" :label-width="80">
+                            <Select placeholder="请选择" v-model="searchDetail.brand">
+                                <Option
                                     :value="item.value"
                                     v-for="item in options"
                                     :label="item.label"
                                     :key="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="18" class="tr">
-                        <el-form-item>
-                            <el-button @click="reset">清空</el-button>
-                            <el-button type="primary" @click="search">搜索</el-button>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="24">
-                    <el-col :span="24" class="tr">
-                        <el-form-item>
+                                </Option>
+                            </Select>
+                        </Form-item>
+                    </Col>
+                    <Col span="18" class="tr">
+                        <Form-item>
+                            <Button @click="reset">清空</Button>
+                            <Button type="primary" @click="search">搜索</Button>
+                        </Form-item>
+                    </Col>
+                </Row>
+                <Row :gutter="24">
+                    <Col span="24" class="tr">
+                        <Form-item>
                             <a href="#/product/product-new">
-                                <el-button type="primary">新增商品</el-button>
+                                <Button type="primary">新增商品</Button>
                             </a>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="全部" name="all"></el-tab-pane>
-                <el-tab-pane label="已上架" name="up"></el-tab-pane>
-                <el-tab-pane label="已下架" name="down"></el-tab-pane>
-            </el-tabs>
+                        </Form-item>
+                    </Col>
+                </Row>
+            </Form>
+            <Tabs v-model="activeName" @on-click="handleClick">
+                <Tab-pane label="全部" name="all"></Tab-pane>
+                <Tab-pane label="已上架" name="up"></Tab-pane>
+                <Tab-pane label="已下架" name="down"></Tab-pane>
+            </Tabs>
             <el-table
                 :data="tableData"
                 border

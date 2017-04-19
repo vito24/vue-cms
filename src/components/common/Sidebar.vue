@@ -70,6 +70,8 @@
         bottom: 10px;
         left: 10px;
         background: #2e363f;
+        padding: 2px;
+        border-radius: 5px;
     }
     .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
     .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {

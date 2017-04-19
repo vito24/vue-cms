@@ -42,7 +42,7 @@
         background: #2e363f;
     }
     .layout-nav{
-        width: 420px;
-        margin: 0 auto;
+        display: flex;
+        justify-content: center;
     }
 </style>
