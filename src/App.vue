@@ -43,13 +43,14 @@
 		left: 250px;
 		bottom: 10px;
 		right: 0;
-		top: 70px;
+		top: 60px;
 		width: auto;
         overflow-x: auto;
         border-radius: 5px;
 	}
     .content {
         min-height: 100%;
+        margin-right: 10px;
         padding: 20px;
         background-color: #fff;
         border-radius: 5px;

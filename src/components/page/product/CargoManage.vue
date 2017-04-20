@@ -185,7 +185,7 @@
         },
         mounted () {
             //获取分类
-            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/2CDC3CBC4446883ABFE2EB8C561CBD85', {
+            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/BF1E95D99A97EFE02D8DC071D3F73C53', {
                 parentId: 0,
             }).then(response => {
                 this.ccSelectList = response.data.obj.cargoCategoryVoList;
@@ -194,7 +194,7 @@
             });
 
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/458/2CDC3CBC4446883ABFE2EB8C561CBD85', {
+            this.$http.post('/api/supplier/querySuppliers/458/BF1E95D99A97EFE02D8DC071D3F73C53', {
                 pageNo: 1,
                 pageSize: 10000
             }).then(response => {
@@ -204,7 +204,7 @@
             });
 
             //获取货物列表
-            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/2CDC3CBC4446883ABFE2EB8C561CBD85', {
+            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/BF1E95D99A97EFE02D8DC071D3F73C53', {
                 pageNo: this.pageNo,
                 pageSize: this.pageSize
             }).then(response => {
@@ -217,10 +217,6 @@
 </script>
 
 <style>
-    .first-img {
-        width: 100px;
-        margin-top: 8px;
-    }
     .vi-pagnation {
         display: flex;
         justify-content: flex-end;

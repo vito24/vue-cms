@@ -1,16 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-//首页
-import Home from '@/components/page/Home';
-
-//商品
-import ProductList from '@/components/page/product/ProductList' //所有商品
-import ProductNew from '@/components/page/product/ProductNew'  //新增商品
-import CargoCategoryManage from '@/components/page/product/CargoCategoryManage' //货物分类
-import CargoManage from '@/components/page/product/CargoManage'  //货物管理
-import CargoAdd from '@/components/page/product/CargoAdd'  //新增货物
-
 Vue.use(Router);
 
 const Parent = {
@@ -23,7 +12,7 @@ export default new Router({
             path: '/',
             redirect: '/home/index'
         }, {
-            path: '/home',
+            path: '/home', //首页
             component: Parent,
             children: [
                 {
@@ -31,14 +20,20 @@ export default new Router({
                     redirect: '/home/index'
                 }, {
                     path: 'index',
-                    component: Home
+                    component: (resolve) => require(['@/components/page/Home'], resolve),
+                    meta: {
+                        title: '概况'
+                    }
                 }, {
                     path: 'feedbacks',
-                    component: Home
+                    component: (resolve) => require(['@/components/page/Home'], resolve),
+                    meta: {
+                        title: '意见反馈'
+                    }
                 }
             ]
         }, {
-            path: '/product',
+            path: '/product',  //商品
             component: Parent,
             children: [
                 {
@@ -46,19 +41,34 @@ export default new Router({
                     redirect: '/product/product-list'
                 }, {
                     path: 'product-list',
-                    component: ProductList
+                    component: (resolve) => require(['@/components/page/product/ProductList'], resolve),
+                    meta: {
+                        title: '所有商品'
+                    }
                 }, {
                     path: 'product-new',
-                    component: ProductNew
+                    component: (resolve) => require(['@/components/page/product/ProductNew'], resolve),
+                    meta: {
+                        title: '新增商品'
+                    }
                 }, {
                     path: 'cargo-category-manage',
-                    component: CargoCategoryManage
+                    component: (resolve) => require(['@/components/page/product/CargoCategoryManage'], resolve),
+                    meta: {
+                        title: '货物分类'
+                    }
                 }, {
                     path: 'cargo-manage',
-                    component: CargoManage
+                    component: (resolve) => require(['@/components/page/product/CargoManage'], resolve),
+                    meta: {
+                        title: '货物管理'
+                    }
                 }, {
                     path: 'cargo-add',
-                    component: CargoAdd
+                    component: (resolve) => require(['@/components/page/product/CargoAdd'], resolve),
+                    meta: {
+                        title: '新增货物'
+                    }
                 }
             ]
         }

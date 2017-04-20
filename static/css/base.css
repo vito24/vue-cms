@@ -88,6 +88,10 @@ ul {
 /**
 iview enhance
  */
+.ivu-menu-horizontal {
+    height: 50px;
+    line-height: 50px;
+}
 .ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title {
     padding: 10px 24px;
 }

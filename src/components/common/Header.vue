@@ -43,6 +43,6 @@
     }
     .layout-nav{
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
     }
 </style>

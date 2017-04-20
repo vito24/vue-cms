@@ -66,7 +66,7 @@
         width: 230px;
         display: block;
         position: absolute;
-        top: 70px;
+        top: 60px;
         bottom: 10px;
         left: 10px;
         background: #2e363f;

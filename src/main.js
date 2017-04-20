@@ -13,8 +13,20 @@ import '../static/css/base.css'
 Vue.use(ElementUI);
 Vue.use(iView);
 
-Vue.config.productionTip = false;
+// Vue.config.productionTip = false;
+Vue.config.debug = true;
 Vue.prototype.$http = axios;
+
+router.beforeEach((to, from, next) => {
+    iView.LoadingBar.start();
+    window.document.title = to.meta.title || 'BOSS';
+    next();
+});
+
+router.afterEach(route => {
+    iView.LoadingBar.finish();
+    window.scrollTo(0, 0);
+});
 
 new Vue({
 	el: '#app',
