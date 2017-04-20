@@ -14,15 +14,15 @@
                     </template>
                     <Menu-item
                         v-for="(second, index) in first.children"
-                        :name="second.index"
-                        :class="curSidebar === second.index ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
-                        :key="index">
+                        :name="second.path"
+                        :class="curSidebar === second.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
+                        :key="path">
                         {{second.name}}
                     </Menu-item>
                 </Submenu>
                 <Menu-item
-                    :name="first.index"
-                    :class="curSidebar === first.index ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
+                    :name="first.path"
+                    :class="curSidebar === first.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
                     v-else>
                     {{first.name}}
                 </Menu-item>

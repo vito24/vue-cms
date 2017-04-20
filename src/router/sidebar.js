@@ -5,31 +5,31 @@
 const sideBars = {
     product: [
         {
-            index: '1',
+            path: '1',
             name: '商品管理',
             children: [
                 {
-                    index: '/product/product-list',
+                    path: '/product/product-list',
                     name: '所有商品'
                 }, {
-                    index: '1-2',
+                    path: '1-2',
                     name: '草稿箱'
                 }
             ]
         }, {
-            index: '/product/cargo-category-manage',
+            path: '/product/cargo-category-manage',
             name: '货物分类'
         }, {
-            index: '/product/cargo-manage',
+            path: '/product/cargo-manage',
             name: '货物管理'
         }
     ],
     home: [
         {
-            index: '/home/index',
+            path: '/home/index',
             name: '概况'
         }, {
-            index: '/home/feedbacks',
+            path: '/home/feedbacks',
             name: '意见反馈'
         }
     ]

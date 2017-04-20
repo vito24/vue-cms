@@ -64,9 +64,9 @@
                 <Row>
                     <Col class="tr">
                         <Form-item>
-                            <a href="#/product/cargo-add">
+                            <router-link to="/product/cargo-add">
                                 <Button type="primary">新增货物</Button>
-                            </a>
+                            </router-link>
                         </Form-item>
                     </Col>
                 </Row>
@@ -185,7 +185,7 @@
         },
         mounted () {
             //获取分类
-            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/BF1E95D99A97EFE02D8DC071D3F73C53', {
+            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/B0AFC50E94F6417E7236003C88D4E666', {
                 parentId: 0,
             }).then(response => {
                 this.ccSelectList = response.data.obj.cargoCategoryVoList;
@@ -194,7 +194,7 @@
             });
 
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/458/BF1E95D99A97EFE02D8DC071D3F73C53', {
+            this.$http.post('/api/supplier/querySuppliers/458/B0AFC50E94F6417E7236003C88D4E666', {
                 pageNo: 1,
                 pageSize: 10000
             }).then(response => {
@@ -204,7 +204,7 @@
             });
 
             //获取货物列表
-            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/BF1E95D99A97EFE02D8DC071D3F73C53', {
+            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/B0AFC50E94F6417E7236003C88D4E666', {
                 pageNo: this.pageNo,
                 pageSize: this.pageSize
             }).then(response => {
