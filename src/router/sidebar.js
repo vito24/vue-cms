@@ -5,7 +5,7 @@
 const sideBars = {
     product: [
         {
-            path: '1',
+            path: '/product',
             name: '商品管理',
             children: [
                 {

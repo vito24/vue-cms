@@ -4,10 +4,9 @@
             theme="dark"
             :active-name="curSidebar"
             width="auto"
-            :open-names="['product']"
             @on-select="routeTo">
             <template v-for="first in sidebarData">
-                <Submenu name="product" v-if="first.children">
+                <Submenu :name="first.path" v-if="first.children">
                     <template slot="title">
                         <Icon type="ios-navigate"></Icon>
                         {{first.name}}
@@ -16,7 +15,7 @@
                         v-for="(second, index) in first.children"
                         :name="second.path"
                         :class="curSidebar === second.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
-                        :key="path">
+                        :key="second.path">
                         {{second.name}}
                     </Menu-item>
                 </Submenu>
@@ -37,7 +36,7 @@
         name: 'sidebar',
 		data () {
 			return {
-                curSidebar: this.$route.path
+
 			}
 		},
         methods: {
@@ -46,16 +45,12 @@
             }
         },
         computed: {
+            curSidebar () {
+                return this.$route.path;
+            },
             sidebarData () {
                 const moudule = this.$route.path.split('/')[1];
                 return sideBars[moudule];
-            }
-        },
-        watch: {
-            $route (newRoute, oldRoute) {
-                const module = newRoute.path.split('/')[1];
-                this.sidebarData = sideBars[module];
-                this.curSidebar = newRoute.path;
             }
         }
 	}
