@@ -1,10 +1,14 @@
 <template>
 	<div id="app">
 		<vi-header></vi-header>
-        <vi-sidebar></vi-sidebar>
-        <div class="wrapper">
-            <router-view class="content"></router-view>
-        </div>
+        <Row class="vi-wrapper">
+            <i-col span="4" class="vi-sidebar">
+                <vi-sidebar></vi-sidebar>
+            </i-col>
+            <i-col span="20" class="vi-content">
+                <router-view></router-view>
+            </i-col>
+        </Row>
 	</div>
 </template>
 
@@ -38,21 +42,13 @@
 		color: #2c3e50;
         background-color: #eee;
 	}
-	.wrapper {
-		position: absolute;
-		left: 250px;
-		bottom: 10px;
-		right: 0;
-		top: 60px;
-		width: auto;
-        overflow-x: auto;
-        border-radius: 5px;
-	}
-    .content {
-        min-height: 100%;
-        margin-right: 10px;
+    .vi-wrapper, .vi-sidebar, .vi-content {
+        height: 100% !important;
+    }
+    .vi-content {
         padding: 20px;
         background-color: #fff;
         border-radius: 5px;
+        overflow-y: auto;
     }
 </style>

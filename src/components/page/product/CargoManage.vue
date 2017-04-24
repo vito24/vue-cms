@@ -7,24 +7,24 @@
         <div class="pt10">
             <Form>
                 <Row>
-                    <Col span="6">
+                    <i-col span="6">
                         <Form-item label="货号" :label-width="80">
-                            <Input placeholder="请输入货号" v-model="searchDetail.cargoNo"></Input>
+                            <i-input placeholder="请输入货号" v-model="queryParams.cargoNo"></i-input>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="分类" :label-width="80">
-                            <Cascader :data="ccSelectList" trigger="click" v-model="searchDetail.categoryId"></Cascader>
+                            <Cascader :data="ccSelectList" trigger="click" v-model="queryParams.categoryId"></Cascader>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="名称" :label-width="80">
-                            <Input placeholder="请输入名称" v-model="searchDetail.name"></Input>
+                            <i-input placeholder="请输入名称" v-model="queryParams.name"></i-input>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="供应商" :label-width="80">
-                            <Select placeholder="请选择" v-model="searchDetail.supplierId">
+                            <Select placeholder="请选择" v-model="queryParams.supplierId">
                                 <Option
                                     :value="item.suppliersId"
                                     v-for="item in supplierList"
@@ -33,46 +33,52 @@
                                 </Option>
                             </Select>
                         </Form-item>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row>
-                    <Col span="6">
+                    <i-col span="6">
                         <Form-item label="厂家型号" :label-width="80">
-                            <Input placeholder="请输入厂家型号" v-model="searchDetail.manufacturerModel"></Input>
+                            <i-input placeholder="请输入厂家型号" v-model="queryParams.manufacturerModel"></i-input>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="采购价" :label-width="80">
-                            <Input placeholder="请输入最低价" v-model="searchDetail.minPurchasePrice"></Input>
+                            <i-input placeholder="请输入最低价" v-model="queryParams.minPurchasePrice"></i-input>
                         </Form-item>
-                    </Col>
-                    <Col span="2">
+                    </i-col>
+                    <i-col span="2">
                         <Form-item label="" :label-width="0" class="tc">-</Form-item>
-                    </Col>
-                    <Col span="4">
+                    </i-col>
+                    <i-col span="4">
                         <Form-item label="" :label-width="0">
-                            <Input placeholder="请输入最高价" v-model="searchDetail.maxPurchasePrice"></Input>
+                            <i-input placeholder="请输入最高价" v-model="queryParams.maxPurchasePrice"></i-input>
                         </Form-item>
-                    </Col>
-                    <Col span="6" class="tr">
+                    </i-col>
+                    <i-col span="6" class="tr">
                         <Form-item>
                             <Button @click="reset">清空</Button>
                             <Button type="primary" @click="search">搜索</Button>
                         </Form-item>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row>
-                    <Col class="tr">
+                    <i-col class="tr">
                         <Form-item>
                             <router-link to="/product/cargo-add">
                                 <Button type="primary">新增货物</Button>
                             </router-link>
                         </Form-item>
-                    </Col>
+                    </i-col>
                 </Row>
             </Form>
             <Table border :context="self" :columns="columns" :data="cargoData.list"></Table>
-            <Page class="vi-pagnation" :total="cargoData.count" show-total show-elevator @on-change="handlePageChange"></Page>
+            <Page
+                class="vi-pagnation"
+                :total="cargoData.count"
+                show-total
+                show-elevator
+                @on-change="handlePageChange">
+            </Page>
         </div>
     </div>
 </template>
@@ -83,65 +89,62 @@
         data () {
             return {
                 self: this,
-                searchDetail: {
-                    categoryId: [],
-                    supplierId: null
+                queryParams: {
+
                 },
                 cargoData: [],
                 ccSelectList: [],
                 supplierList: [],
-                props: {
-                    value: 'id',
-                    label: 'name'
-                },
                 pageNo: 1,
                 pageSize: 10,
-                columns: [{
-                    title: '货号',
-                    key: 'cargoNo',
-                }, {
-                    title: '名称',
-                    key: 'name'
-                }, {
-                    title: '图片',
-                    key: 'image',
-                    align: 'center',
-                    width: 130,
-                    render (row, column, index) {
-                        return `
-                            <img style="margin: 10px 0;" src="${row.image}?imageView2/2/w/100/h/100">
-                        `;
+                columns: [
+                    {
+                        title: '货号',
+                        key: 'cargoNo',
+                    }, {
+                        title: '名称',
+                        key: 'name'
+                    }, {
+                        title: '图片',
+                        key: 'image',
+                        align: 'center',
+                        width: 130,
+                        render (row, column, index) {
+                            return `
+                                <img style="margin: 10px 0;" src="${row.image}?imageView2/2/w/100/h/100">
+                            `;
+                        }
+                    }, {
+                        title: '分类',
+                        key: 'categoryId'
+                    }, {
+                        title: '供应商',
+                        key: 'supplierId'
+                    }, {
+                        title: '厂家型号',
+                        key: 'manufacturerModel'
+                    },  {
+                        title: '规格备注',
+                        key: 'specificationNote'
+                    }, {
+                        title: '采购价',
+                        key: 'purchasePrice'
+                    }, {
+                        title: '包裹数',
+                        key: 'packageSum'
+                    }, {
+                        title: '操作',
+                        key: 'action',
+                        align: 'center',
+                        width: 160,
+                        render (row, column, index) {
+                            return `
+                                <i-button type="primary" size="small" @click="handleEdit(${index})">编辑</i-button>
+                                <i-button type="error" size="small" @click="handleDelete(${index})">删除</i-button>
+                            `;
+                        }
                     }
-                }, {
-                    title: '分类',
-                    key: 'categoryId'
-                }, {
-                    title: '供应商',
-                    key: 'supplierId'
-                }, {
-                    title: '厂家型号',
-                    key: 'manufacturerModel'
-                },  {
-                    title: '规格备注',
-                    key: 'specificationNote'
-                }, {
-                    title: '采购价',
-                    key: 'purchasePrice'
-                }, {
-                    title: '包裹数',
-                    key: 'packageSum'
-                }, {
-                    title: '操作',
-                    key: 'action',
-                    align: 'center',
-                    width: 160,
-                    render (row, column, index) {
-                        return `
-                            <i-button type="primary" size="small" @click="handleEdit(${index})">编辑</i-button>
-                            <i-button type="error" size="small" @click="handleDelete(${index})">删除</i-button>
-                        `;
-                    }
-                }]
+                ]
             }
         },
         computed: {
@@ -159,8 +162,22 @@
             ...mapActions([
                'add'
             ]),
+            queryCargo () {
+                //获取货物列表
+                let params = {
+                    pageNo: this.pageNo,
+                    pageSize: this.pageSize
+                };
+                Object.assign(params, this.queryParams);
+                this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/B594E969FEF215A18BD3AF1478EC94A6', params).then(response => {
+                    this.cargoData = response.data.obj;
+                }).catch(error => {
+                    throw new Error(error);
+                });
+            },
             search () {
-                console.log('searchDetail', this.searchDetail)
+                console.log('queryParams', this.queryParams)
+                this.queryCargo();
 //                this.INCREMENT()
 //                this.add()
 //                this.$store.dispatch('add').then(() => {
@@ -168,10 +185,7 @@
 //                });
             },
             reset () {
-                this.searchDetail = {
-                    categoryId: [],
-                    supplierId: null
-                };
+                this.queryParams = {};
             },
             handleEdit () {
 
@@ -179,13 +193,14 @@
             handleDelete () {
 
             },
-            handlePageChange(val) {
-                console.log(`当前第 ${val} 页`);
+            handlePageChange (val) {
+                this.pageNo = val;
+                this.queryCargo();
             }
         },
         mounted () {
             //获取分类
-            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/B0AFC50E94F6417E7236003C88D4E666', {
+            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/B594E969FEF215A18BD3AF1478EC94A6', {
                 parentId: 0,
             }).then(response => {
                 this.ccSelectList = response.data.obj.cargoCategoryVoList;
@@ -194,7 +209,7 @@
             });
 
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/458/B0AFC50E94F6417E7236003C88D4E666', {
+            this.$http.post('/api/supplier/querySuppliers/458/B594E969FEF215A18BD3AF1478EC94A6', {
                 pageNo: 1,
                 pageSize: 10000
             }).then(response => {
@@ -203,23 +218,19 @@
                 throw new Error(error);
             });
 
-            //获取货物列表
-            this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/B0AFC50E94F6417E7236003C88D4E666', {
-                pageNo: this.pageNo,
-                pageSize: this.pageSize
-            }).then(response => {
-                this.cargoData = response.data.obj;
-            }).catch(error => {
-                throw new Error(error);
-            });
+            this.queryCargo();
         }
     }
 </script>
 
 <style>
     .vi-pagnation {
+        height: 80px;
         display: flex;
         justify-content: flex-end;
         margin-top: 20px;
+    }
+    .ivu-table-header th, .ivu-table-cell {
+        text-align: center;
     }
 </style>

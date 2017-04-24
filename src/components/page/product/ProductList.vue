@@ -8,29 +8,29 @@
         <div class="pt10">
             <Form>
                 <Row :gutter="24">
-                    <Col span="6">
+                    <i-col span="6">
                         <Form-item label="商品名称" :label-width="80">
                             <Input placeholder="请输入商品名称" v-model="searchDetail.productName"></Input>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="厂家型号" :label-width="80">
                             <Input placeholder="请输入厂家型号" v-model="searchDetail.factorySerial"></Input>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="SPU编号" :label-width="80">
                             <Input placeholder="请输入SPU编号" v-model="searchDetail.spuId"></Input>
                         </Form-item>
-                    </Col>
-                    <Col span="6">
+                    </i-col>
+                    <i-col span="6">
                         <Form-item label="SKU编号" :label-width="80">
                             <Input placeholder="请输入SKU编号" v-model="searchDetail.skuId"></Input>
                         </Form-item>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row :gutter="24">
-                    <Col span="6">
+                    <i-col span="6">
                         <Form-item label="品牌&系列" :label-width="80">
                             <Select placeholder="请选择" v-model="searchDetail.brand">
                                 <Option
@@ -41,22 +41,22 @@
                                 </Option>
                             </Select>
                         </Form-item>
-                    </Col>
-                    <Col span="18" class="tr">
+                    </i-col>
+                    <i-col span="18" class="tr">
                         <Form-item>
                             <Button @click="reset">清空</Button>
                             <Button type="primary" @click="search">搜索</Button>
                         </Form-item>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row :gutter="24">
-                    <Col span="24" class="tr">
+                    <i-col span="24" class="tr">
                         <Form-item>
                             <a href="#/product/product-new">
                                 <Button type="primary">新增商品</Button>
                             </a>
                         </Form-item>
-                    </Col>
+                    </i-col>
                 </Row>
             </Form>
             <Tabs v-model="activeName" @on-click="handleClick">

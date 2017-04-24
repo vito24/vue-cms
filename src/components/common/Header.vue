@@ -1,21 +1,19 @@
 <template>
-	<div class="header">
-        <Menu mode="horizontal" theme="dark" :active-name="curActive" @on-select="routeTo">
-            <router-link to="/" class="nav-logo">
-                <img src="./../../assets/aijia-logo.png">
-            </router-link>
-            <div class="layout-nav">
-                <Menu-item name="/home">
-                    <Icon type="ios-navigate"></Icon>
-                    首页
-                </Menu-item>
-                <Menu-item name="/product">
-                    <Icon type="ios-keypad"></Icon>
-                    商品
-                </Menu-item>
-            </div>
-        </Menu>
-	</div>
+    <Menu mode="horizontal" theme="dark" :active-name="curActive" @on-select="routeTo">
+        <router-link to="/" class="nav-logo">
+            <img src="./../../assets/aijia-logo.png">
+        </router-link>
+        <div class="layout-nav">
+            <Menu-item name="/home">
+                <Icon type="ios-navigate"></Icon>
+                首页
+            </Menu-item>
+            <Menu-item name="/product">
+                <Icon type="ios-keypad"></Icon>
+                商品
+            </Menu-item>
+        </div>
+    </Menu>
 </template>
 
 <script>
@@ -49,9 +47,6 @@
     }
     .nav-logo img {
         height: 30px;
-    }
-    .header .ivu-menu-dark {
-        background: #2e363f;
     }
     .layout-nav{
         display: flex;

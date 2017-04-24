@@ -88,6 +88,9 @@ ul {
 /**
 iview enhance
  */
+.ivu-menu-dark {
+    background: #2e363f;
+}
 .ivu-menu-horizontal {
     height: 50px;
     line-height: 50px;
