@@ -10,17 +10,17 @@
                 <Row>
                     <i-col span="8">
                         <Form-item label="分类" :label-width="120">
-                            <Cascader :data="ccSelectList" trigger="click" v-model="queryParams.categoryId"></Cascader>
+                            <Cascader :data="ccSelectList" trigger="click" v-model="cargoDetail.categoryId"></Cascader>
                         </Form-item>
                     </i-col>
                     <i-col span="8">
                         <Form-item label="名称" :label-width="120">
-                            <i-input placeholder="请输入名称" v-model="queryParams.name"></i-input>
+                            <i-input placeholder="请输入名称" v-model="cargoDetail.name"></i-input>
                         </Form-item>
                     </i-col>
                     <i-col span="8">
                         <Form-item label="供应商" :label-width="120">
-                            <Select placeholder="请选择" v-model="queryParams.supplierId">
+                            <Select placeholder="请选择" v-model="cargoDetail.supplierId">
                                 <Option
                                     :value="item.suppliersId"
                                     v-for="item in supplierList"
@@ -34,24 +34,24 @@
                 <Row>
                     <i-col span="8">
                         <Form-item label="采购价" :label-width="120">
-                            <i-input placeholder="请输入采购价" v-model="queryParams.manufacturerModel"></i-input>
+                            <i-input placeholder="请输入采购价" v-model="cargoDetail.manufacturerModel"></i-input>
                         </Form-item>
                     </i-col>
                     <i-col span="8">
                         <Form-item label="厂家型号" :label-width="120">
-                            <i-input placeholder="请输入厂家型号" v-model="queryParams.manufacturerModel"></i-input>
+                            <i-input placeholder="请输入厂家型号" v-model="cargoDetail.manufacturerModel"></i-input>
                         </Form-item>
                     </i-col>
                     <i-col span="8">
                         <Form-item label="规格备注" :label-width="120">
-                            <i-input placeholder="请输入规格备注" v-model="queryParams.minPurchasePrice"></i-input>
+                            <i-input placeholder="请输入规格备注" v-model="cargoDetail.minPurchasePrice"></i-input>
                         </Form-item>
                     </i-col>
                 </Row>
                 <Row>
                     <i-col span="8">
                         <Form-item label="包裹数" :label-width="120">
-                            <Select placeholder="请选择" v-model="queryParams.packageCount">
+                            <Select placeholder="请选择" v-model="cargoDetail.packageCount" @on-change="changePackageCount">
                                 <Option
                                     :value="n"
                                     v-for="n in 10"
@@ -63,10 +63,10 @@
                     </i-col>
                     <i-col span="16">
                         <Form-item label="上传图片" :label-width="120">
-                            <div class="demo-upload-list" v-for="item in uploadList">
+                            <div class="upload-list" v-for="item in uploadList">
                                 <template v-if="item.status === 'finished'">
                                     <img :src="item.url">
-                                    <div class="demo-upload-list-cover">
+                                    <div class="upload-list-cover">
                                         <Icon type="ios-eye-outline" @click.native="handleView(item.url)"></Icon>
                                         <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
                                     </div>
@@ -105,7 +105,7 @@
                         <Form-item label="包裹信息" :label-width="120"></Form-item>
                     </i-col>
                     <i-col span="16">
-                        <Table border :context="self" :columns="columns" :data="cargoData"></Table>
+                        <Table border :context="self" :columns="columns" :data="cargoDetail.cargoData"></Table>
                     </i-col>
                 </Row>
                 <Row>
@@ -126,29 +126,80 @@
         data () {
             return {
                 self: this,
-                queryParams: '',
                 ccSelectList: [],
                 supplierList: [],
-                cargoData: [],
+                cargoDetail: {
+                    cargoData: []
+                },
                 columns: [
                     {
                         title: '包裹数',
                         key: 'cargoNo',
+                        render (row, column, index) {
+                            return `
+                                包裹${index + 1}
+                            `;
+                        }
                     }, {
                         title: '长（mm）',
-                        key: 'name'
+                        key: 'name',
+                        render (row, column, index) {
+                            return `
+                                <i-input
+                                    placeholder=""
+                                    v-model="cargoDetail.cargoData[${index}].length"
+                                    @on-change="handleChangeSize(${index})"
+                                    :maxlength="7"
+                                    :number="true">
+                                </i-input>
+                            `;
+                        }
                     }, {
                         title: '宽（mm）',
-                        key: 'categoryId'
+                        key: 'categoryId',
+                        render (row, column, index) {
+                            return `
+                                <i-input
+                                    placeholder=""
+                                    v-model="cargoDetail.cargoData[${index}].width"
+                                    @on-change="handleChangeSize(${index})"
+                                    :maxlength="7">
+                                </i-input>
+                            `;
+                        }
                     }, {
                         title: '高（mm）',
-                        key: 'supplierId'
+                        key: 'supplierId',
+                        render (row, column, index) {
+                            return `
+                                <i-input
+                                    placeholder=""
+                                    v-model="cargoDetail.cargoData[${index}].height"
+                                    @on-change="handleChangeSize(${index})"
+                                    :maxlength="7">
+                                </i-input>
+                            `;
+                        }
                     }, {
                         title: '体积（m<sup>3</sup>）',
-                        key: 'manufacturerModel'
+                        key: 'manufacturerModel',
+                        render (row, column, index) {
+                            return `
+                                <span>{{cargoDetail.cargoData[${index}].volume}}</span>
+                            `;
+                        }
                     }, {
                         title: '毛重（kg）',
-                        key: 'manufacturerModel'
+                        key: 'manufacturerModel',
+                        render (row, column, index) {
+                            return `
+                                <i-input
+                                    placeholder=""
+                                    v-model="cargoDetail.cargoData[${index}].weight"
+                                    :maxlength="7">
+                                </i-input>
+                            `;
+                        }
                     }
                 ],
                 defaultList: [],
@@ -160,34 +211,58 @@
             }
         },
         methods: {
-            save () {
-
+            //改变包裹数量
+            changePackageCount (val) {
+                let cargoData = [];
+                for (let i = 0; i < val; i++) {
+                    cargoData.push({});
+                }
+                this.cargoDetail.cargoData = cargoData;
             },
+            //改变货物尺寸
+            handleChangeSize (index) {
+                let curCargoData = this.cargoDetail.cargoData[index];
+                const length = curCargoData.length;
+                const width = curCargoData.width;
+                const height = curCargoData.height;
+                curCargoData.volume = length * width * height / 1000000000;
+                this.cargoDetail.cargoData.splice(index, 1, curCargoData);
+            },
+            //保存货物
+            save () {
+                console.log('save', this.cargoDetail);
+            },
+            //预览图片
             handleView (url) {
                 this.viewImgUrl = url;
                 this.visible = true;
             },
+            //移除图片
             handleRemove (file) {
                 this.uploadList.splice(this.uploadList.indexOf(file), 1);
             },
+            //图片上传成功
             handleSuccess (res, file) {
                 this.uploadList.push({
                     url: `http://${this.qiniuDomain}/${res.hash}`,
                     status: 'finished'
                 });
             },
+            //图片格式错误
             handleFormatError (file) {
                 this.$Notice.warning({
                     title: '文件格式不正确',
                     desc: '文件 ' + file.name + ' 格式不正确，请上传 jpg 或 png 格式的图片。'
                 });
             },
+            //图片尺寸错误
             handleMaxSize (file) {
                 this.$Notice.warning({
                     title: '超出文件大小限制',
                     desc: '文件 ' + file.name + ' 太大，不能超过 2M。'
                 });
             },
+            //上传图片之前
             handleBeforeUpload (file) {
                 const check = this.uploadList.length < 5;
                 if (!check) {
@@ -215,14 +290,14 @@
                 throw new Error(error);
             });
         }
-    }
+    };
 </script>
 
 <style>
     sup {
         top: -0.3em;
     }
-    .demo-upload-list {
+    .upload-list {
         display: inline-block;
         width: 100px;
         height: 100px;
@@ -236,11 +311,11 @@
         box-shadow: 0 1px 1px rgba(0,0,0,.2);
         margin-right: 4px;
     }
-    .demo-upload-list img {
+    .upload-list img {
         width: 100%;
         height: 100%;
     }
-    .demo-upload-list-cover {
+    .upload-list-cover {
         display: none;
         position: absolute;
         top: 0;
@@ -249,10 +324,10 @@
         right: 0;
         background: rgba(0,0,0,.6);
     }
-    .demo-upload-list:hover .demo-upload-list-cover {
+    .upload-list:hover .upload-list-cover {
         display: block;
     }
-    .demo-upload-list-cover i {
+    .upload-list-cover i {
         color: #fff;
         font-size: 20px;
         cursor: pointer;
