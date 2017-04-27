@@ -71,6 +71,12 @@ export default new Router({
                     }
                 }
             ]
+        }, {
+            path: '/404',
+            component: (resolve) => require(['@/components/page/404'], resolve)
+        }, {
+            path: '*',
+            redirect: '/404'
         }
     ]
 })
