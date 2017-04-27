@@ -1,5 +1,6 @@
 <template>
-    <div class="product-list">
+    <vi-article>
+        <div class="product-list">
         <Breadcrumb>
             <Breadcrumb-item>商品</Breadcrumb-item>
             <Breadcrumb-item>商品管理</Breadcrumb-item>
@@ -124,9 +125,11 @@
             </el-table>
         </div>
     </div>
+    </vi-article>
 </template>
 
 <script>
+    import ViArticle from '../../../components/common/article'
     export default {
         data () {
             return {
@@ -163,6 +166,9 @@
                     imageUrl: 'http://pic.58pic.com/58pic/13/60/13/82M58PICVPs_1024.jpg'
                 }]
             }
+        },
+        components: {
+            ViArticle
         },
         methods: {
             reset () {

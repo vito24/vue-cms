@@ -1,55 +1,62 @@
 <template>
-    <Menu mode="horizontal" theme="dark" :active-name="curActive" @on-select="routeTo">
-        <router-link to="/" class="nav-logo">
-            <img src="./../../assets/aijia-logo.png">
-        </router-link>
-        <div class="layout-nav">
-            <Menu-item name="/home">
-                <Icon type="ios-navigate"></Icon>
-                首页
-            </Menu-item>
-            <Menu-item name="/product">
-                <Icon type="ios-keypad"></Icon>
-                商品
-            </Menu-item>
-        </div>
+    <Menu theme="dark" mode="horizontal" :active-name="currentActiveKey" @on-select="handleSelect">
+        <Menu-item name="home">
+            <Icon type="ios-navigate"></Icon>
+            首页
+        </Menu-item>
+        <Menu-item name="product">
+            <Icon type="ios-keypad"></Icon>
+            商品
+        </Menu-item>
     </Menu>
 </template>
 
 <script>
-	export default {
-		name: 'header',
-		data () {
-			return {
+    import navigate from './navigate';
 
-			}
-		},
-        computed: {
-            curActive () {
-                const module = this.$route.path.split('/')[1];
-                return `/${module}`;
+    export default {
+        props: {
+            activeKey: String
+        },
+        data () {
+            return {
+                search: '',
+                navigateList: [],
+                liveDot: false,
+                currentActiveKey: this.activeKey
+            };
+        },
+        watch: {
+            activeKey (val) {
+                this.currentActiveKey = val;
+            },
+            currentActiveKey (val) {
+                this.$emit('on-change', val);
             }
         },
         methods: {
-            routeTo (e) {
-                this.$router.push(e);
+            handleSelect (type) {
+                this.$router.push(navigate[type][0].path);
+                this.$nextTick(() => {
+                    this.updateActiveNav(type);
+                });
+            },
+            updateActiveNav (type) {
+                this.currentActiveKey = type;
             }
+        },
+        created () {
+            let list = [];
+            for (let i = 0; i < navigate.components.length; i++) {
+                for (let j = 0; j < navigate.components[i].list.length; j++) {
+                    list.push(navigate.components[i].list[j]);
+                }
+            }
+            this.navigateList = list;
         }
-	}
+    };
 </script>
 
-<style scoped>
-    .nav-logo {
-        height: 30px;
-        margin-top: 10px;
-        margin-left: 20px;
-        float: left;
-    }
-    .nav-logo img {
-        height: 30px;
-    }
-    .layout-nav{
-        display: flex;
-        justify-content: flex-end;
-    }
+<style>
+
 </style>

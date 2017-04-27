@@ -13,14 +13,12 @@
                 <Menu-item
                     v-for="(second, index) in first.children"
                     :name="second.path"
-                    :class="curSidebar === second.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
                     :key="second.path">
                     {{second.name}}
                 </Menu-item>
             </Submenu>
             <Menu-item
                 :name="first.path"
-                :class="curSidebar === first.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
                 v-else>
                 {{first.name}}
             </Menu-item>
@@ -57,9 +55,5 @@
 <style scoped>
     .ivu-menu-vertical {
         height: 100%;
-    }
-    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
-    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {
-        border-right: 3px solid #39f;
     }
 </style>

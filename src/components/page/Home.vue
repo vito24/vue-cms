@@ -1,20 +1,26 @@
 <template>
-	<div class="hello">
-        <Breadcrumb>
-            <Breadcrumb-item>首页</Breadcrumb-item>
-            <Breadcrumb-item>概况</Breadcrumb-item>
-        </Breadcrumb>
-	</div>
+    <vi-article>
+        <div class="hello">
+            <Breadcrumb>
+                <Breadcrumb-item>首页</Breadcrumb-item>
+                <Breadcrumb-item>概况</Breadcrumb-item>
+            </Breadcrumb>
+        </div>
+    </vi-article>
 </template>
 
 <script>
+    import ViArticle from '../../components/common/article'
 	export default {
 		name: 'hello',
 		data () {
 			return {
 				msg: 'Home Page'
 			}
-		}
+		},
+        components: {
+            ViArticle
+        }
 	}
 </script>
 
