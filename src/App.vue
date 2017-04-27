@@ -1,8 +1,14 @@
 <template>
 	<div id="app">
 		<vi-header></vi-header>
-        <vi-sidebar></vi-sidebar>
-		<router-view class="content"></router-view>
+        <Row class="vi-wrapper">
+            <i-col span="4" class="vi-sidebar">
+                <vi-sidebar></vi-sidebar>
+            </i-col>
+            <i-col span="20" class="vi-content">
+                <router-view></router-view>
+            </i-col>
+        </Row>
 	</div>
 </template>
 
@@ -34,15 +40,15 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		color: #2c3e50;
+        background-color: #eee;
 	}
-	.content {
-		position: absolute;
-		left: 230px;
-		bottom: 0;
-		right: 0;
-		top: 60px;
-		padding: 20px;
-		width: auto;
-        overflow-x: auto;
-	}
+    .vi-wrapper, .vi-sidebar, .vi-content {
+        height: 100% !important;
+    }
+    .vi-content {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        overflow-y: auto;
+    }
 </style>

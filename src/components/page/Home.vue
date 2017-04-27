@@ -1,9 +1,9 @@
 <template>
 	<div class="hello">
-        <el-breadcrumb separator="/">
-            <el-breadcrumb-item>首页</el-breadcrumb-item>
-        </el-breadcrumb>
-		<h1>{{ msg }}</h1>
+        <Breadcrumb>
+            <Breadcrumb-item>首页</Breadcrumb-item>
+            <Breadcrumb-item>概况</Breadcrumb-item>
+        </Breadcrumb>
 	</div>
 </template>
 
@@ -12,7 +12,7 @@
 		name: 'hello',
 		data () {
 			return {
-				msg: 'Welcome to Your Vue.js App'
+				msg: 'Home Page'
 			}
 		}
 	}

@@ -1,67 +1,65 @@
 <template>
-	<div>
-        <el-menu
-            :default-active="curSidebar"
-            class="el-menu-vertical-demo sidebar"
-            theme="dark"
-            router>
-            <template
-                v-for="first in sidebarData">
-                <el-submenu :index="first.index" v-if="first.children">
-                    <template slot="title">{{first.name}}</template>
-                    <el-menu-item
-                        v-for="(second, index) in first.children"
-                        :index="second.index"
-                        :class="curSidebar === second.index ? 'is-active' : ''"
-                        :key="index">
-                        {{second.name}}
-                    </el-menu-item>
-                </el-submenu>
-                <el-menu-item
-                    :index="first.index"
-                    :class="curSidebar === first.index ? 'is-active' : ''"
-                    v-else>
+    <Menu
+        theme="dark"
+        :active-name="curSidebar"
+        width="auto"
+        @on-select="routeTo">
+        <template v-for="first in sidebarData">
+            <Submenu :name="first.path" v-if="first.children">
+                <template slot="title">
+                    <Icon type="ios-navigate"></Icon>
                     {{first.name}}
-                </el-menu-item>
-            </template>
-        </el-menu>
-	</div>
+                </template>
+                <Menu-item
+                    v-for="(second, index) in first.children"
+                    :name="second.path"
+                    :class="curSidebar === second.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
+                    :key="second.path">
+                    {{second.name}}
+                </Menu-item>
+            </Submenu>
+            <Menu-item
+                :name="first.path"
+                :class="curSidebar === first.path ? 'ivu-menu-item-active ivu-menu-item-selected is-active' : ''"
+                v-else>
+                {{first.name}}
+            </Menu-item>
+        </template>
+    </Menu>
 </template>
-<style scoped>
-	.sidebar {
-		width: 230px;
-		display: block;
-		position: absolute;
-		top: 60px;
-		bottom: 0;
-		left: 0;
-		background: #2e363f;
-	}
-	.el-menu {
-		border-radius: 0;
-	}
-</style>
+
 <script>
     import sideBars from '@/router/sidebar'
 	export default{
         name: 'sidebar',
 		data () {
 			return {
-                curSidebar: this.$route.path
+
 			}
 		},
+        methods: {
+            routeTo (e) {
+                this.$router.push(e);
+            }
+        },
         computed: {
+            curSidebar () {
+                return this.$route.path;
+            },
             sidebarData () {
                 const moudule = this.$route.path.split('/')[1];
                 return sideBars[moudule];
             }
-        },
-        watch: {
-            $route (newRoute, oldRoute) {
-                const module = newRoute.path.split('/')[1];
-                this.sidebarData = sideBars[module];
-                this.curSidebar = newRoute.path;
-            }
         }
 	}
 </script>
+
+<style scoped>
+    .ivu-menu-vertical {
+        height: 100%;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {
+        border-right: 3px solid #39f;
+    }
+</style>

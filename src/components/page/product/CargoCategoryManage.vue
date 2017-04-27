@@ -1,90 +1,40 @@
 <template>
     <div>
-        <el-breadcrumb separator="/">
-            <el-breadcrumb-item>商品</el-breadcrumb-item>
-            <el-breadcrumb-item>货物分类</el-breadcrumb-item>
-        </el-breadcrumb>
+        <Breadcrumb>
+            <Breadcrumb-item>商品</Breadcrumb-item>
+            <Breadcrumb-item>货物分类</Breadcrumb-item>
+        </Breadcrumb>
         <div class="pt10">
-            <el-form>
-                <el-row :gutter="24">
-                    <el-col :span="6">
-                        <el-form-item label="上级分类" label-width="80px">
-                            <el-select placeholder="请选择" v-model="searchDetail.brand">
-                                <el-option
-                                    :value="item.value"
-                                    v-for="item in options"
-                                    :label="item.label"
-                                    :key="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="18" class="tr">
-                        <el-form-item>
-                            <el-button @click="reset">清空</el-button>
-                            <el-button type="primary" @click="search">搜索</el-button>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row :gutter="24">
-                    <el-col :span="24" class="tr">
-                        <el-form-item>
-                            <el-button type="primary" @click="addCategory">新增分类</el-button>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <el-table
-                :data="tableData"
-                border
-                style="width: 100%">
-                <el-table-column
-                    label="分类编号"
-                    width="150">
-                    <template scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.spuId }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    label="分类名称"
-                    width="180">
-                    <template scope="scope">
-                        <img class="first-img" :src="scope.row.imageUrl" >
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    label="展开/收缩"
-                    width="180">
-                    <template scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.name }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    label="是否启用"
-                    width="140">
-                    <template scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.brandName }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    label="上级分类"
-                    width="120">
-                    <template scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.date }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作">
-                    <template scope="scope">
-                        <el-button
-                            size="small"
-                            type="danger"
-                        @click="handleAdd(scope.$index, scope.row)">添加</el-button>
-                        <el-button
-                            size="small"
-                            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
+            <Form>
+                <Row>
+                    <i-col span="6">
+                        <Form-item label="上级分类" :label-width="80">
+                            <Select placeholder="请选择" v-model="queryParams.supplierId">
+                                <Option
+                                    :value="item.suppliersId"
+                                    v-for="item in supplierList"
+                                    :label="item.name"
+                                    :key="item.suppliersId">
+                                </Option>
+                            </Select>
+                        </Form-item>
+                    </i-col>
+                    <i-col span="18" class="tr">
+                        <Form-item>
+                            <Button @click="reset">清空</Button>
+                            <Button type="primary" @click="search">搜索</Button>
+                        </Form-item>
+                    </i-col>
+                </Row>
+                <Row>
+                    <i-col class="tr">
+                        <Form-item>
+                            <Button type="primary">新增分类</Button>
+                        </Form-item>
+                    </i-col>
+                </Row>
+            </Form>
+            <Table border :context="self" :columns="columns" :data="cargoData"></Table>
         </div>
     </div>
 </template>
@@ -93,9 +43,54 @@
     export default {
         data () {
             return {
-                searchDetail: {
+                self: this,
+                queryParams: {
 
                 },
+                cargoData: [],
+                columns: [
+                    {
+                        title: '分类编号',
+                        key: 'cargoNo',
+                    }, {
+                        title: '分类名称',
+                        key: 'name'
+                    }, {
+                        title: '展开/收缩',
+                        key: 'categoryId'
+                    }, {
+                        title: '是否启用',
+                        key: 'supplierId'
+                    }, {
+                        title: '上级分类',
+                        key: 'manufacturerModel'
+                    },  {
+                        title: '操作',
+                        key: 'action',
+                        align: 'center',
+                        width: 160,
+                        render (row, column, index) {
+                            return `
+                                <i-button type="error" size="small" @click="handleAdd(${index})">添加</i-button>
+                                <i-button type="primary" size="small" @click="handleEdit(${index})">编辑</i-button>
+                            `;
+                        }
+                    }
+                ]
+            }
+        },
+        methods: {
+            reset () {
+                this.queryParams = {};
+            },
+            search () {
+
+            },
+            handleAdd () {
+
+            },
+            handleEdit () {
+
             }
         }
     }

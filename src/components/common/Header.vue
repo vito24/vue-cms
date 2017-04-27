@@ -1,16 +1,19 @@
 <template>
-	<div class="header">
-		<el-menu
-			theme="dark"
-			:default-active="curActive"
-			class="el-menu-demo"
-			mode="horizontal"
-			router>
-			<div class="logo">BOSS</div>
-			<el-menu-item index="/home">首页</el-menu-item>
-			<el-menu-item index="/product">商品</el-menu-item>
-		</el-menu>
-	</div>
+    <Menu mode="horizontal" theme="dark" :active-name="curActive" @on-select="routeTo">
+        <router-link to="/" class="nav-logo">
+            <img src="./../../assets/aijia-logo.png">
+        </router-link>
+        <div class="layout-nav">
+            <Menu-item name="/home">
+                <Icon type="ios-navigate"></Icon>
+                首页
+            </Menu-item>
+            <Menu-item name="/product">
+                <Icon type="ios-keypad"></Icon>
+                商品
+            </Menu-item>
+        </div>
+    </Menu>
 </template>
 
 <script>
@@ -26,23 +29,27 @@
                 const module = this.$route.path.split('/')[1];
                 return `/${module}`;
             }
+        },
+        methods: {
+            routeTo (e) {
+                this.$router.push(e);
+            }
         }
 	}
 </script>
 
 <style scoped>
-	.logo {
-		float: left;
-		height: 60px;
-		line-height: 60px;
-		font-size: 20px;
-		color: #FFF;
-		margin-left: 10px;
-	}
-	.el-menu-demo {
-		background-color: #242f42;
-	}
-	.el-menu {
-		border-radius: 0;
-	}
+    .nav-logo {
+        height: 30px;
+        margin-top: 10px;
+        margin-left: 20px;
+        float: left;
+    }
+    .nav-logo img {
+        height: 30px;
+    }
+    .layout-nav{
+        display: flex;
+        justify-content: flex-end;
+    }
 </style>
