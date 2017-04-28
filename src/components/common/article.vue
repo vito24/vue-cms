@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
         <div class="vi-header">
-            <vi-header :active-key="activeKey"></vi-header>
+            <nav-menu :active-key="activeKey" @on-change="handleNavMenuChange"></nav-menu>
         </div>
-        <div class="vi-sidebar">
-            <vi-sidebar :type="activeKey"></vi-sidebar>
+        <div class="vi-navigate">
+            <Navigate :type="activeKey"></Navigate>
         </div>
         <div class="vi-content">
             <slot></slot>
@@ -13,21 +13,26 @@
 </template>
 
 <script>
-    import ViHeader from './Header'
-    import ViSidebar from './Sidebar'
+    import NavMenu from './Header'
+    import Navigate from './Sidebar'
     export default {
         data () {
             return {
+                donate: false,
+                ask: false,
                 activeKey: ''
             }
         },
         components: {
-            ViHeader,
-            ViSidebar
+            NavMenu,
+            Navigate
         },
         methods: {
             updateActiveNav () {
                 this.activeKey = this.$route.path.split('/')[1];
+            },
+            handleNavMenuChange (val) {
+                this.activeKey = val;
             }
         },
         mounted () {
@@ -40,7 +45,7 @@
     .vi-header {
         height: 50px;
     }
-    .vi-sidebar {
+    .vi-navigate {
         width: 18%;
         height: 100%;
         position: absolute;

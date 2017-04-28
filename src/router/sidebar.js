@@ -5,23 +5,23 @@
 const sideBars = {
     product: [
         {
-            path: '/product/cargo-category-manage',
-            name: '货物分类'
-        }, {
-            path: '/product/cargo-manage',
-            name: '货物管理'
-        }, {
-            path: 'productManage',
+            path: '/product',
             name: '商品管理',
             children: [
                 {
                     path: '/product/product-list',
                     name: '所有商品'
                 }, {
-                    path: '/product/product-draft-manage',
+                    path: '1-2',
                     name: '草稿箱'
                 }
             ]
+        }, {
+            path: '/product/cargo-category-manage',
+            name: '货物分类'
+        }, {
+            path: '/product/cargo-manage',
+            name: '货物管理'
         }
     ],
     home: [

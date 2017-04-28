@@ -1,5 +1,5 @@
 <template>
-    <main-layout>
+    <vi-article>
         <div>
             <Breadcrumb>
                 <Breadcrumb-item>商品</Breadcrumb-item>
@@ -82,11 +82,11 @@
                 </Page>
             </div>
         </div>
-    </main-layout>
+    </vi-article>
 </template>
 
 <script>
-    import MainLayout from '@/components/common/MainLayout'
+    import ViArticle from '../../../components/common/article'
     import { mapState, mapMutations, mapActions } from 'vuex'
     export default {
         data () {
@@ -151,7 +151,7 @@
             }
         },
         components: {
-            MainLayout
+            ViArticle
         },
         computed: {
 //            ...mapState([
