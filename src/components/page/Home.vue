@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import ViArticle from '../../components/common/article'
+    import ViArticle from '../common/MainLayout'
 	export default {
 		name: 'hello',
 		data () {

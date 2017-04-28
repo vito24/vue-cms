@@ -1,5 +1,5 @@
 <template>
-    <vi-article>
+    <main-layout>
         <div class="product-list">
         <Breadcrumb>
             <Breadcrumb-item>商品</Breadcrumb-item>
@@ -125,11 +125,11 @@
             </el-table>
         </div>
     </div>
-    </vi-article>
+    </main-layout>
 </template>
 
 <script>
-    import ViArticle from '../../../components/common/article'
+    import MainLayout from '@/components/common/MainLayout'
     export default {
         data () {
             return {
@@ -168,7 +168,7 @@
             }
         },
         components: {
-            ViArticle
+            MainLayout
         },
         methods: {
             reset () {
