@@ -76,6 +76,7 @@
                 <Page
                     class="vi-pagnation"
                     :total="cargoData.count"
+                    :page-size="pageSize"
                     show-total
                     show-elevator
                     @on-change="handlePageChange">
@@ -99,7 +100,7 @@
                 ccSelectList: [],
                 supplierList: [],
                 pageNo: 1,
-                pageSize: 10,
+                pageSize: 30,
                 columns: [
                     {
                         title: '货号',
@@ -175,7 +176,7 @@
                     pageSize: this.pageSize
                 };
                 Object.assign(params, this.queryParams);
-                this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/F035FEC19F838ACDE554ACEF5B456FAB', params).then(response => {
+                this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', params).then(response => {
                     this.cargoData = response.data.obj;
                 }).catch(error => {
                     throw new Error(error);
@@ -199,14 +200,14 @@
             handleDelete () {
 
             },
-            handlePageChange (val) {
-                this.pageNo = val;
+            handlePageChange (pageNo) {
+                this.pageNo = pageNo;
                 this.queryCargo();
             }
         },
         mounted () {
             //获取分类
-            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/F035FEC19F838ACDE554ACEF5B456FAB', {
+            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', {
                 parentId: 0,
             }).then(response => {
                 this.ccSelectList = response.data.obj.cargoCategoryVoList;
@@ -215,7 +216,7 @@
             });
 
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/458/F035FEC19F838ACDE554ACEF5B456FAB', {
+            this.$http.post('/api/supplier/querySuppliers/458/747906AB3E3014C7FCC8F2D96E00F7F2', {
                 pageNo: 1,
                 pageSize: 10000
             }).then(response => {
@@ -230,12 +231,6 @@
 </script>
 
 <style>
-    .vi-pagnation {
-        height: 80px;
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-    }
     .ivu-table-header th, .ivu-table-cell {
         text-align: center;
     }

@@ -85,6 +85,12 @@ ul {
     padding-top: 50px;
 }
 
+.vi-pagnation {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
 /**
 iview enhance
  */
