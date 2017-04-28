@@ -1,127 +1,130 @@
 <template>
-    <div>
-        <Breadcrumb>
-            <Breadcrumb-item>商品</Breadcrumb-item>
-            <Breadcrumb-item>货物管理</Breadcrumb-item>
-            <Breadcrumb-item>新增货物</Breadcrumb-item>
-        </Breadcrumb>
-        <div class="pt10">
-            <Form>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="分类" :label-width="120">
-                            <Cascader :data="ccSelectList" trigger="click" v-model="cargoDetail.categoryId"></Cascader>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="名称" :label-width="120">
-                            <i-input placeholder="请输入名称" v-model="cargoDetail.name"></i-input>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="供应商" :label-width="120">
-                            <Select placeholder="请选择" v-model="cargoDetail.supplierId">
-                                <Option
-                                    :value="item.suppliersId"
-                                    v-for="item in supplierList"
-                                    :label="item.name"
-                                    :key="item.suppliersId">
-                                </Option>
-                            </Select>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="采购价" :label-width="120">
-                            <i-input placeholder="请输入采购价" v-model="cargoDetail.manufacturerModel"></i-input>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="厂家型号" :label-width="120">
-                            <i-input placeholder="请输入厂家型号" v-model="cargoDetail.manufacturerModel"></i-input>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="规格备注" :label-width="120">
-                            <i-input placeholder="请输入规格备注" v-model="cargoDetail.minPurchasePrice"></i-input>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="包裹数" :label-width="120">
-                            <Select placeholder="请选择" v-model="cargoDetail.packageCount" @on-change="changePackageCount">
-                                <Option
-                                    :value="n"
-                                    v-for="n in 10"
-                                    :label="n"
-                                    :key="n">
-                                </Option>
-                            </Select>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="16">
-                        <Form-item label="上传图片" :label-width="120">
-                            <div class="upload-list" v-for="item in uploadList">
-                                <template v-if="item.status === 'finished'">
-                                    <img :src="item.url">
-                                    <div class="upload-list-cover">
-                                        <Icon type="ios-eye-outline" @click.native="handleView(item.url)"></Icon>
-                                        <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-                                    </div>
-                                </template>
-                                <template v-else>
-                                    <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
-                                </template>
-                            </div>
-                            <Upload
-                                ref="upload"
-                                :show-upload-list="false"
-                                :default-file-list="defaultList"
-                                :on-success="handleSuccess"
-                                :format="['jpg','jpeg','png']"
-                                :max-size="2048"
-                                :on-format-error="handleFormatError"
-                                :on-exceeded-size="handleMaxSize"
-                                :before-upload="handleBeforeUpload"
-                                :multiple="false"
-                                type="drag"
-                                :data="fileData"
-                                action="http://upload.qiniu.com"
-                                style="display: inline-block; width: 98px;">
-                                <div style="width: 98px; height: 98px; line-height: 98px;">
-                                    <Icon type="camera" size="20"></Icon>
+    <main-layout>
+        <div>
+            <Breadcrumb>
+                <Breadcrumb-item>商品</Breadcrumb-item>
+                <Breadcrumb-item>货物管理</Breadcrumb-item>
+                <Breadcrumb-item>新增货物</Breadcrumb-item>
+            </Breadcrumb>
+            <div class="pt10">
+                <Form>
+                    <Row>
+                        <i-col span="8">
+                            <Form-item label="分类" :label-width="120">
+                                <Cascader :data="ccSelectList" trigger="click" v-model="cargoDetail.categoryId"></Cascader>
+                            </Form-item>
+                        </i-col>
+                        <i-col span="8">
+                            <Form-item label="名称" :label-width="120">
+                                <i-input placeholder="请输入名称" v-model="cargoDetail.name"></i-input>
+                            </Form-item>
+                        </i-col>
+                        <i-col span="8">
+                            <Form-item label="供应商" :label-width="120">
+                                <Select placeholder="请选择" v-model="cargoDetail.supplierId">
+                                    <Option
+                                        :value="item.suppliersId"
+                                        v-for="item in supplierList"
+                                        :label="item.name"
+                                        :key="item.suppliersId">
+                                    </Option>
+                                </Select>
+                            </Form-item>
+                        </i-col>
+                    </Row>
+                    <Row>
+                        <i-col span="8">
+                            <Form-item label="采购价" :label-width="120">
+                                <i-input placeholder="请输入采购价" v-model="cargoDetail.manufacturerModel"></i-input>
+                            </Form-item>
+                        </i-col>
+                        <i-col span="8">
+                            <Form-item label="厂家型号" :label-width="120">
+                                <i-input placeholder="请输入厂家型号" v-model="cargoDetail.manufacturerModel"></i-input>
+                            </Form-item>
+                        </i-col>
+                        <i-col span="8">
+                            <Form-item label="规格备注" :label-width="120">
+                                <i-input placeholder="请输入规格备注" v-model="cargoDetail.minPurchasePrice"></i-input>
+                            </Form-item>
+                        </i-col>
+                    </Row>
+                    <Row>
+                        <i-col span="8">
+                            <Form-item label="包裹数" :label-width="120">
+                                <Select placeholder="请选择" v-model="cargoDetail.packageCount" @on-change="changePackageCount">
+                                    <Option
+                                        :value="n"
+                                        v-for="n in 10"
+                                        :label="n"
+                                        :key="n">
+                                    </Option>
+                                </Select>
+                            </Form-item>
+                        </i-col>
+                        <i-col span="16">
+                            <Form-item label="上传图片" :label-width="120">
+                                <div class="upload-list" v-for="item in uploadList">
+                                    <template v-if="item.status === 'finished'">
+                                        <img :src="item.url">
+                                        <div class="upload-list-cover">
+                                            <Icon type="ios-eye-outline" @click.native="handleView(item.url)"></Icon>
+                                            <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+                                    </template>
                                 </div>
-                            </Upload>
-                            <Modal title="查看图片" v-model="visible">
-                                <img :src="viewImgUrl" v-if="visible" style="width: 100%">
-                            </Modal>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <Row>
-                    <i-col span="3">
-                        <Form-item label="包裹信息" :label-width="120"></Form-item>
-                    </i-col>
-                    <i-col span="16">
-                        <Table border :context="self" :columns="columns" :data="cargoDetail.cargoData"></Table>
-                    </i-col>
-                </Row>
-                <Row>
-                    <i-col span="24" class="mt20 tr">
-                        <Form-item>
-                            <Button>取消</Button>
-                            <Button type="primary" @click="save">保存</Button>
-                        </Form-item>
-                    </i-col>
-                </Row>
-            </Form>
+                                <Upload
+                                    ref="upload"
+                                    :show-upload-list="false"
+                                    :default-file-list="defaultList"
+                                    :on-success="handleSuccess"
+                                    :format="['jpg','jpeg','png']"
+                                    :max-size="2048"
+                                    :on-format-error="handleFormatError"
+                                    :on-exceeded-size="handleMaxSize"
+                                    :before-upload="handleBeforeUpload"
+                                    :multiple="false"
+                                    type="drag"
+                                    :data="fileData"
+                                    action="http://upload.qiniu.com"
+                                    style="display: inline-block; width: 98px;">
+                                    <div style="width: 98px; height: 98px; line-height: 98px;">
+                                        <Icon type="camera" size="20"></Icon>
+                                    </div>
+                                </Upload>
+                                <Modal title="查看图片" v-model="visible">
+                                    <img :src="viewImgUrl" v-if="visible" style="width: 100%">
+                                </Modal>
+                            </Form-item>
+                        </i-col>
+                    </Row>
+                    <Row>
+                        <i-col span="3">
+                            <Form-item label="包裹信息" :label-width="120"></Form-item>
+                        </i-col>
+                        <i-col span="16">
+                            <Table border :context="self" :columns="columns" :data="cargoDetail.cargoData"></Table>
+                        </i-col>
+                    </Row>
+                    <Row>
+                        <i-col span="24" class="mt20 tr">
+                            <Form-item>
+                                <Button>取消</Button>
+                                <Button type="primary" @click="save">保存</Button>
+                            </Form-item>
+                        </i-col>
+                    </Row>
+                </Form>
+            </div>
         </div>
-    </div>
+    </main-layout>
 </template>
 
 <script>
+    import MainLayout from '@/components/common/MainLayout'
     export default {
         data () {
             return {
@@ -209,6 +212,9 @@
                 qiniuDomain: '',
                 fileData: {}
             }
+        },
+        components: {
+            MainLayout
         },
         methods: {
             //改变包裹数量
