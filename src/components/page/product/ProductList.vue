@@ -45,8 +45,43 @@
                         </Form-item>
                     </i-col>
                     <i-col span="6">
+                        <Form-item label="品牌&系列" :label-width="80">
+                            <Select
+                                placeholder="请选择"
+                                v-model="queryParams.brand"
+                                @on-change="handleSelectBrand(queryParams.brand)">
+                                <Option
+                                    :value="brand.brandDto.id"
+                                    v-for="brand in brandList"
+                                    :key="brand.brandDto.id">
+                                    {{brand.brandDto.name}}
+                                </Option>
+                            </Select>
+                        </Form-item>
+                    </i-col>
+                    <i-col span="6">
+                        <Form-item label="" :label-width="80">
+                            <Select
+                                placeholder="请选择"
+                                v-model="queryParams.brand2"
+                                v-show="brand2List.length">
+                                <Option
+                                    :value="brand2.brandDto.id"
+                                    v-for="brand2 in brand2List"
+                                    :key="brand2.brandDto.id">
+                                    {{brand2.brandDto.name}}
+                                </Option>
+                            </Select>
+                        </Form-item>
+                    </i-col>
+                </Row>
+                <Row :gutter="24">
+                    <i-col span="6">
                         <Form-item label="类目" :label-width="80">
-                            <Select placeholder="请选择" v-model="queryParams.brand">
+                            <Select
+                                placeholder="请选择"
+                                v-model="queryParams.type"
+                                @on-change="handleSelectType(queryParams.type)">
                                 <Option
                                     :value="item.categoryDto.id"
                                     v-for="item in categoryList"
@@ -56,21 +91,38 @@
                             </Select>
                         </Form-item>
                     </i-col>
-                </Row>
-                <Row :gutter="24">
                     <i-col span="6">
-                        <Form-item label="品牌&系列" :label-width="80">
-                            <Select placeholder="请选择" v-model="queryParams.brand">
+                        <Form-item label="" :label-width="80">
+                            <Select
+                                placeholder="请选择"
+                                v-model="queryParams.type2"
+                                @on-change="handleSelectType2(queryParams.type2)"
+                                v-show="category2List.length">
                                 <Option
-                                    :value="item.categoryDto.name"
-                                    v-for="item in categoryList"
-                                    :label="item.label"
-                                    :key="item.categoryDto.name">
+                                    :value="item.categoryDto.id"
+                                    v-for="item in category2List"
+                                    :key="item.categoryDto.id">
+                                    {{item.categoryDto.name}}
                                 </Option>
                             </Select>
                         </Form-item>
                     </i-col>
-                    <i-col span="18" class="tr">
+                    <i-col span="6">
+                        <Form-item label="" :label-width="80">
+                            <Select
+                                placeholder="请选择"
+                                v-model="queryParams.type3"
+                                v-show="category3List.length">
+                                <Option
+                                    :value="item.categoryDto.id"
+                                    v-for="item in category3List"
+                                    :key="item.categoryDto.id">
+                                    {{item.categoryDto.name}}
+                                </Option>
+                            </Select>
+                        </Form-item>
+                    </i-col>
+                    <i-col span="6" class="tr">
                         <Form-item>
                             <Button @click="reset">清空</Button>
                             <Button type="primary" @click="search">搜索</Button>
@@ -116,11 +168,15 @@
                 pageNo: 1,
                 pageSize: 30,
                 queryParams: {
-
+                    //查询参数
                 },
-                categoryList: [],
-                activeName: 'up',
-                productData: {},
+                categoryList: [],  //一级类目
+                category2List: [],  //二级类目
+                category3List: [],  //三级类目
+                brandList: [],  //一级品牌
+                brand2List: [], //二级品牌
+                activeName: 'all',
+                productData: {},   //商品信息
                 columns: [
                     {
                         title: '商品编号（SPU）',
@@ -208,9 +264,11 @@
         },
         methods: {
             reset () {
+                //清空
                 this.queryParams = {};
             },
             search () {
+                //搜索
                 this.queryProduct();
                 console.log('search', this.queryParams);
             },
@@ -241,11 +299,11 @@
                         name: queryParams.name || null,
                         aijiaLowerPrice: queryParams.aijiaLowerPrice || null,
                         aijiaUpperPrice: queryParams.aijiaUpperPrice || null,
-                        typeOneId: null,
-                        typeTwoId: null,
-                        typeThreeId: null,
-                        brandIdOne: null,
-                        brandIdTwo: null,
+                        typeOneId: queryParams.type || null,
+                        typeTwoId: queryParams.type2 || null,
+                        typeThreeId: queryParams.type3 || null,
+                        brandIdOne: queryParams.brand || null,
+                        brandIdTwo: queryParams.brand2 || null,
                         factoryNumber: queryParams.factoryNumber || null,
                         skuId: queryParams.skuId || null,
                         status: null
@@ -261,6 +319,33 @@
             handlePageChange (pageNo) {
                 this.pageNo = pageNo;
                 this.queryProduct();
+            },
+            handleSelectBrand (brandId) {
+                //切换一级品牌，获取二级品牌
+                this.$http.post('/api/gateway/brand/queryBrand/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', {
+                    id: brandId
+                }).then(response => {
+                    this.brand2List = response.data.obj.brandTreeNodeDtos;
+                })
+            },
+            handleSelectType (typeId) {
+                //切换一级类目，获取二级类目
+                this.category3List = [];
+                this.categoryList.forEach((value, index, array) => {
+                   if (value.categoryDto.id === typeId) {
+                        this.category2List = array[index].categoryTreeNodeDtos;
+                        return false;
+                   }
+                });
+            },
+            handleSelectType2 (type2Id) {
+                //切换二级类目，获取三级类目
+                this.category2List.forEach((value, index, array) => {
+                    if (value.categoryDto.id === type2Id) {
+                        this.category3List = array[index].categoryTreeNodeDtos;
+                        return false;
+                    }
+                });
             }
         },
         mounted () {
@@ -269,11 +354,13 @@
             this.$http.post('/api/gateway/category/queryCategory/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', {
                 type: '1'
             }).then(response => {
-                console.log(1111,response)
                 this.categoryList = response.data.obj.categoryTreeNodeDtos;
-            }).catch(error => {
-                throw new Error(error);
             });
+
+            //获取一级品牌
+            this.$http.post('/api/gateway/brand/queryBrand/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', {}).then(response => {
+                this.brandList = response.data.obj.brandTreeNodeDtos;
+            })
         }
     }
 </script>
