@@ -62,6 +62,13 @@ ul {
     text-align: center;
 }
 
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
 .mt10 {
     margin-top: 10px;
 }
