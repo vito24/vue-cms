@@ -309,11 +309,12 @@
                         status: null
                     }
                 };
-                Object.assign(params, this.queryParams);
-                this.$http.post('/api/gateway/search/searchGoodses/1.0.0/458/542883C23B5B4B27F9A950CDE47369F6', params).then(response => {
+                this.$http({
+                    method: 'post',
+                    url: '/gateway/search/searchGoodses/1.0.0/',
+                    data: params
+                }).then(response => {
                     this.productData = response.data.obj;
-                }).catch(error => {
-                    throw new Error(error);
                 });
             },
             handlePageChange (pageNo) {
@@ -322,11 +323,15 @@
             },
             handleSelectBrand (brandId) {
                 //切换一级品牌，获取二级品牌
-                this.$http.post('/api/gateway/brand/queryBrand/1.0.0/458/542883C23B5B4B27F9A950CDE47369F6', {
-                    id: brandId
+                this.$http({
+                    method: 'post',
+                    url: '/gateway/brand/queryBrand/1.0.0/',
+                    data: {
+                        id: brandId
+                    }
                 }).then(response => {
                     this.brand2List = response.data.obj.brandTreeNodeDtos;
-                })
+                });
             },
             handleSelectType (typeId) {
                 //切换一级类目，获取二级类目
@@ -351,14 +356,22 @@
         mounted () {
             this.queryProduct();
             //获取商品类目
-            this.$http.post('/api/gateway/category/queryCategory/1.0.0/458/542883C23B5B4B27F9A950CDE47369F6', {
-                type: '1'
+            this.$http({
+                method: 'post',
+                url: '/gateway/category/queryCategory/1.0.0/',
+                data: {
+                    type: '1'
+                }
             }).then(response => {
                 this.categoryList = response.data.obj.categoryTreeNodeDtos;
             });
 
             //获取一级品牌
-            this.$http.post('/api/gateway/brand/queryBrand/1.0.0/458/542883C23B5B4B27F9A950CDE47369F6', {}).then(response => {
+            this.$http({
+                method: 'post',
+                url: '/gateway/brand/queryBrand/1.0.0/',
+                data: {}
+            }).then(response => {
                 this.brandList = response.data.obj.brandTreeNodeDtos;
             });
         }

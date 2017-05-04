@@ -82,7 +82,11 @@
             ViArticle
         },
         mounted () {
-            this.$http.post('/api/admin/home/458/542883C23B5B4B27F9A950CDE47369F6', {}).then(response => {
+            this.$http({
+                method: 'post',
+                url: '/admin/home/',
+                data: {}
+            }).then(response => {
                 this.data = response.data.obj;
             });
         }

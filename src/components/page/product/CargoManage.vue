@@ -176,10 +176,12 @@
                     pageSize: this.pageSize
                 };
                 Object.assign(params, this.queryParams);
-                this.$http.post('/api/gateway/cargo/queryCargo/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', params).then(response => {
+                this.$http({
+                    method: 'post',
+                    url: '/gateway/cargo/queryCargo/1.0.0/',
+                    data: params
+                }).then(response => {
                     this.cargoData = response.data.obj;
-                }).catch(error => {
-                    throw new Error(error);
                 });
             },
             search () {
@@ -207,22 +209,26 @@
         },
         mounted () {
             //获取分类
-            this.$http.post('/api/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/458/747906AB3E3014C7FCC8F2D96E00F7F2', {
-                parentId: 0,
+            this.$http({
+                method: 'post',
+                url: '/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/',
+                data: {
+                    parentId: 0
+                }
             }).then(response => {
                 this.ccSelectList = response.data.obj.cargoCategoryVoList;
-            }).catch(error => {
-                throw new Error(error);
             });
 
             //获取供货商
-            this.$http.post('/api/supplier/querySuppliers/458/747906AB3E3014C7FCC8F2D96E00F7F2', {
-                pageNo: 1,
-                pageSize: 10000
+            this.$http({
+                method: 'post',
+                url: '/supplier/querySuppliers/',
+                data: {
+                    pageNo: 1,
+                    pageSize: 10000
+                }
             }).then(response => {
                 this.supplierList = response.data.obj.list;
-            }).catch(error => {
-                throw new Error(error);
             });
 
             this.queryCargo();

@@ -281,10 +281,14 @@
         },
         mounted () {
             this.uploadList = this.defaultList;
-
-            //获取qiniu的token
-            this.$http.get('/api/media/qiniutoken?bucketName=aijia-product-test', {
-                parentId: 0,
+            
+            this.$http({
+                method: 'get',
+                url: '/media/qiniutoken?bucketName=aijia-product-test',
+                data: {
+                    parentId: 0,
+                },
+                login: false
             }).then(response => {
                 const resp = response.data.obj;
                 this.qiniuDomain = resp.downloadUrl;
@@ -292,8 +296,6 @@
                     token: resp.token,
                     accept: 'text/plain'
                 }
-            }).catch(error => {
-                throw new Error(error);
             });
         }
     };

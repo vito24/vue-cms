@@ -3,7 +3,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import iView from 'iview'
-import axios from 'axios'
+import getApi from './config/api'
 
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 import '../static/css/base.css'
@@ -12,7 +12,7 @@ Vue.use(iView);
 
 // Vue.config.productionTip = false;
 Vue.config.debug = true;
-Vue.prototype.$http = axios;
+Vue.prototype.$http = getApi;
 
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
