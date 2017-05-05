@@ -6,7 +6,7 @@
             <Breadcrumb-item>商品管理</Breadcrumb-item>
             <Breadcrumb-item>所有商品</Breadcrumb-item>
         </Breadcrumb>
-        <div class="pt10">
+        <div class="mt20">
             <Form>
                 <Row :gutter="24">
                     <i-col span="6">
@@ -140,9 +140,9 @@
                 </Row>
             </Form>
             <Tabs v-model="activeName" @on-click="handleClickTab">
-                <Tab-pane label="全部" name="all"></Tab-pane>
-                <Tab-pane label="已上架" name="up"></Tab-pane>
-                <Tab-pane label="已下架" name="down"></Tab-pane>
+                <Tab-pane label="全部" name=""></Tab-pane>
+                <Tab-pane label="已上架" name="1"></Tab-pane>
+                <Tab-pane label="已下架" name="0"></Tab-pane>
             </Tabs>
             <Table border :context="self" :columns="columns" :data="productData.goodses"></Table>
             <Page
@@ -175,7 +175,7 @@
                 category3List: [],  //三级类目
                 brandList: [],  //一级品牌
                 brand2List: [], //二级品牌
-                activeName: 'all',
+                activeName: '',
                 productData: {},   //商品信息
                 columns: [
                     {
@@ -272,9 +272,10 @@
                 this.queryProduct();
                 console.log('search', this.queryParams);
             },
-            handleClickTab (tab, event) {
+            handleClickTab (status) {
                 //切换tab
-                console.log(tab, event);
+                this.queryParams.status = status;
+                this.queryProduct();
             },
             handleEdit (index, row) {
                 //编辑商品
@@ -306,7 +307,7 @@
                         brandIdTwo: queryParams.brand2 || null,
                         factoryNumber: queryParams.factoryNumber || null,
                         skuId: queryParams.skuId || null,
-                        status: null
+                        status: queryParams.status || null
                     }
                 };
                 this.$http({

@@ -70,7 +70,7 @@
 </template>
 
 <script>
-    import ViArticle from '../common/MainLayout'
+    import ViArticle from '@/components/common/MainLayout'
 	export default {
 		name: 'hello',
 		data () {

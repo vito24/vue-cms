@@ -5,7 +5,7 @@
                 <Breadcrumb-item>商品</Breadcrumb-item>
                 <Breadcrumb-item>货物管理</Breadcrumb-item>
             </Breadcrumb>
-            <div class="pt10">
+            <div class="mt20">
                 <Form>
                     <Row>
                         <i-col span="6">

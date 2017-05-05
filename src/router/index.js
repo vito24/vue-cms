@@ -20,13 +20,13 @@ export default new Router({
                     redirect: '/home/index'
                 }, {
                     path: 'index',
-                    component: (resolve) => require(['@/components/page/Home'], resolve),
+                    component: (resolve) => require(['@/components/page/home/Index'], resolve),
                     meta: {
                         title: '概况'
                     }
                 }, {
                     path: 'feedbacks',
-                    component: (resolve) => require(['@/components/page/Home'], resolve),
+                    component: (resolve) => require(['@/components/page/home/Feedbacks'], resolve),
                     meta: {
                         title: '意见反馈'
                     }
