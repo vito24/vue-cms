@@ -4,9 +4,13 @@
 import axios from 'axios'
 
 const getApi = (option) => {
-    let url = '/api' + option.url + '458/55F471CFFF7D0815A425F0AC538E10DB';
+    let userInfo = {};
+    if (window.localStorage.aijiaUserdata) {
+        userInfo = JSON.parse(window.localStorage.aijiaUserdata);
+    }
+    let url = `/api${option.url}${userInfo.userId}/${userInfo.sessionId}`;
     if (!option.login && option.login !== undefined) {
-        url = '/api' + option.url;
+        url = `/api${option.url}`;
     }
     return axios({
         method: option.method || 'get',

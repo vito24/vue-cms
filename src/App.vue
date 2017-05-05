@@ -11,6 +11,22 @@
 		    return {
 
             }
+        },
+        methods: {
+		    checkLogin () {
+		        //检查是否登录
+                if (!window.localStorage.aijiaUserdata) {
+                    this.$router.push('/login')
+                }
+            }
+        },
+        watch: {
+		    $route () {
+                this.checkLogin();
+            }
+        },
+        mounted() {
+            this.checkLogin();
         }
 	}
 </script>

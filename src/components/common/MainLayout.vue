@@ -52,7 +52,6 @@
         bottom: 0;
         top: 50px;
         background-color: #fff;
-        border-radius: 5px;
         overflow-y: auto;
         position: absolute;
     }
