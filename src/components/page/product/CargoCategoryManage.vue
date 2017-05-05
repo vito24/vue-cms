@@ -35,7 +35,7 @@
                         </i-col>
                     </Row>
                 </Form>
-                <Table border :context="self" :columns="columns" :data="cargoData"></Table>
+                <Table border :context="self" :columns="columns" :data="cargoList"></Table>
             </div>
         </div>
     </main-layout>
@@ -47,14 +47,13 @@
         data () {
             return {
                 self: this,
-                queryParams: {
-
-                },
-                cargoData: [],
+                queryParams: {},
+                supplierList: [],
+                cargoList: [],
                 columns: [
                     {
                         title: '分类编号',
-                        key: 'cargoNo',
+                        key: 'id',
                     }, {
                         title: '分类名称',
                         key: 'name'
@@ -63,11 +62,14 @@
                         key: 'categoryId'
                     }, {
                         title: '是否启用',
-                        key: 'supplierId'
+                        key: 'status',
+                        render (row, column, index) {
+                            return row.status === 1 ? '是' : '否';
+                        }
                     }, {
                         title: '上级分类',
-                        key: 'manufacturerModel'
-                    },  {
+                        key: 'parentName'
+                    }, {
                         title: '操作',
                         key: 'action',
                         align: 'center',
@@ -80,7 +82,7 @@
                         }
                     }
                 ]
-            }
+            };
         },
         components: {
             MainLayout
@@ -97,7 +99,21 @@
             },
             handleEdit () {
 
+            },
+            queryCargoCategory () {
+                this.$http({
+                    method: 'post',
+                    url: '/gateway/cargoCategory/queryCargoCategoryTree/1.0.0/',
+                    data: {
+                        parentId: 0
+                    }
+                }).then(res => {
+                    this.cargoList = res.data.obj.cargoCategoryVoList;
+                });
             }
+        },
+        mounted () {
+            this.queryCargoCategory();
         }
     }
 </script>

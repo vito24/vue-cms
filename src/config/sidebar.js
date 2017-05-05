@@ -1,6 +1,6 @@
 /**
  * 二级导航配置
- * Created by sun on 2017/4/3.
+ * Created by vito on 2017/4/3.
  */
 const sideBars = {
     product: [

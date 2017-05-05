@@ -281,7 +281,7 @@
         },
         mounted () {
             this.uploadList = this.defaultList;
-
+            //获取qiniu的token
             this.$http({
                 method: 'get',
                 url: '/media/qiniutoken?bucketName=aijia-product-test',
@@ -296,6 +296,18 @@
                     token: resp.token,
                     accept: 'text/plain'
                 }
+            });
+
+            //获取供货商
+            this.$http({
+                method: 'post',
+                url: '/supplier/querySuppliers/',
+                data: {
+                    pageNo: 1,
+                    pageSize: 10000
+                }
+            }).then(response => {
+                this.supplierList = response.data.obj.list;
             });
         }
     };

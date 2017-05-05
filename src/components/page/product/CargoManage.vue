@@ -15,7 +15,12 @@
                         </i-col>
                         <i-col span="6">
                             <Form-item label="分类" :label-width="80">
-                                <Cascader :data="ccSelectList" trigger="click" v-model="queryParams.categoryId"></Cascader>
+                                <Cascader
+                                    :data="cargoCategoryList"
+                                    trigger="click"
+                                    v-model="queryParams.categoryId"
+                                    change-on-select>
+                                </Cascader>
                             </Form-item>
                         </i-col>
                         <i-col span="6">
@@ -97,7 +102,7 @@
 
                 },
                 cargoData: [],
-                ccSelectList: [],
+                cargoCategoryList: [],
                 supplierList: [],
                 pageNo: 1,
                 pageSize: 30,
@@ -166,9 +171,9 @@
 //            ...mapMutations([
 //                'INCREMENT'
 //            ]),
-            ...mapActions([
-               'add'
-            ]),
+//            ...mapActions([
+//               'add'
+//            ]),
             queryCargo () {
                 //获取货物列表
                 let params = {
@@ -176,6 +181,9 @@
                     pageSize: this.pageSize
                 };
                 Object.assign(params, this.queryParams);
+                if (params.categoryId) {
+                    params.categoryId = params.categoryId[params.categoryId.length - 1];
+                }
                 this.$http({
                     method: 'post',
                     url: '/gateway/cargo/queryCargo/1.0.0/',
@@ -185,7 +193,6 @@
                 });
             },
             search () {
-                console.log('queryParams', this.queryParams)
                 this.queryCargo();
 //                this.INCREMENT()
 //                this.add()
@@ -216,10 +223,20 @@
                     parentId: 0
                 }
             }).then(response => {
-                this.ccSelectList = response.data.obj.cargoCategoryVoList;
+                this.cargoCategoryList = response.data.obj.cargoCategoryVoList;
+                const recursion = (obj) => {
+                    obj.value = obj.id;  //级联选择需要value和label两个字段
+                    obj.label = obj.name;
+                    obj.children && obj.children.forEach((val) => {
+                        recursion(val);
+                    });
+                };
+                this.cargoCategoryList.forEach((value) => {
+                    recursion(value);
+                });
             });
 
-            //获取供货商
+            //获取供应商
             this.$http({
                 method: 'post',
                 url: '/supplier/querySuppliers/',
