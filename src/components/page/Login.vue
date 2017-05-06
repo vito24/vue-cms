@@ -1,6 +1,7 @@
 <template>
     <Row type="flex" justify="center" align="middle" class="vi-login">
         <i-col span="5" class="form">
+            <p class="vi-login-text">系统登录</p>
             <Form ref="userinfo" :model="userinfo" :rules="rules">
                 <Form-item prop="username">
                     <i-input type="text" v-model="userinfo.username" placeholder="Username"></i-input>
@@ -86,12 +87,16 @@
     }
 </script>
 
-<style>
-    #app {
-        background-color: #364150;
-    }
+<style scoped>
     .vi-login {
         height: 100%;
+        background-color: #364150;
+    }
+    .vi-login-text {
+        text-align: center;
+        font-size: 30px;
+        color: #fff;
+        margin-bottom: 20px;
     }
     .vi-login-btn {
         width: 100%;
@@ -99,4 +104,5 @@
     .ivu-input {
         height: 36px;
     }
+
 </style>

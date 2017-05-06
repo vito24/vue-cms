@@ -32,16 +32,10 @@
 </script>
 
 <style>
-	html, body, #app {
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-	}
-	#app {
-		font-family: 'Avenir', Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		color: #2c3e50;
-        background-color: #eee;
-	}
+    html, body, #app {
+        height: 100%;
+    }
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+    }
 </style>

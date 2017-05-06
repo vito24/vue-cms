@@ -9,6 +9,7 @@
         <div class="vi-content">
             <slot></slot>
         </div>
+        <Back-top></Back-top>
     </div>
 </template>
 
@@ -38,21 +39,19 @@
 
 <style scoped>
     .vi-header {
+        width: 100%;
         height: 50px;
+        position: fixed;
+        z-index: 4;
     }
     .vi-sidebar {
-        width: 18%;
+        width: 16%;
         height: 100%;
-        position: absolute;
+        position: fixed;
+        top: 50px;
     }
     .vi-content {
-        width: 82%;
-        padding: 20px;
-        left: 18%;
-        bottom: 0;
-        top: 50px;
-        background-color: #fff;
-        overflow-y: auto;
-        position: absolute;
+        margin-left: 16%;
+        padding: 70px 20px 20px;
     }
 </style>
