@@ -58,7 +58,6 @@
                             login: false
                         }).then(res => {
                             const data = res.data;
-                            console.log(data)
                             if (data.code === 1) {
                                 //登陆成功
                                 const obj = {
@@ -87,7 +86,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .vi-login {
         height: 100%;
         background-color: #364150;
@@ -101,8 +100,10 @@
     .vi-login-btn {
         width: 100%;
     }
-    .ivu-input {
+    .vi-login .ivu-input {
         height: 36px;
     }
-
+    .vi-login .ivu-form-item-error .ivu-input {
+        border: none !important;
+    }
 </style>

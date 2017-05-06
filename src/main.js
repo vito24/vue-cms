@@ -5,7 +5,7 @@ import store from './store'
 import iView from 'iview'
 import getApi from './config/api'
 
-import 'iview/dist/styles/iview.css';    // 使用 CSS
+import 'iview/dist/styles/iview.css'    // 使用 CSS
 import '../static/css/base.css'
 
 Vue.use(iView);

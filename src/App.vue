@@ -16,7 +16,7 @@
 		    checkLogin () {
 		        //检查是否登录
                 if (!window.localStorage.aijiaUserdata) {
-                    this.$router.push('/login')
+                    this.$router.push('/login');
                 }
             }
         },

@@ -8,19 +8,21 @@
         <template v-for="first in sidebarData">
             <Submenu :name="first.path" v-if="first.children">
                 <template slot="title">
-                    <Icon type="ios-navigate"></Icon>
+                    <Icon :type="first.icon" v-if="first.icon"></Icon>
                     {{first.name}}
                 </template>
                 <Menu-item
                     v-for="second in first.children"
                     :name="second.path"
                     :key="second.path">
+                    <Icon :type="second.icon" v-if="second.icon">></Icon>
                     {{second.name}}
                 </Menu-item>
             </Submenu>
             <Menu-item
                 :name="first.path"
                 v-else>
+                <Icon :type="first.icon" v-if="first.icon"></Icon>
                 {{first.name}}
             </Menu-item>
         </template>

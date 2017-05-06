@@ -5,7 +5,7 @@
         </router-link>
         <div class="nav-wrapper">
             <Menu-item name="home">
-                <Icon type="ios-navigate"></Icon>
+                <Icon type="ios-home"></Icon>
                 首页
             </Menu-item>
             <Menu-item name="product">
