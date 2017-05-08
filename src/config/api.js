@@ -1,14 +1,11 @@
 /**
  * Created by vito on 2017/5/4.
  */
+import store from '@/store'
 import axios from 'axios'
 
 const getApi = (option) => {
-    let userInfo = {};
-    if (window.localStorage.aijiaUserdata) {
-        userInfo = JSON.parse(window.localStorage.aijiaUserdata);
-    }
-    let url = `/api${option.url}${userInfo.userId}/${userInfo.sessionId}`;
+    let url = `/api${option.url}${store.getters.userId}/${store.getters.sessionId}`;
     if (!option.login && option.login !== undefined) {
         url = `/api${option.url}`;
     }

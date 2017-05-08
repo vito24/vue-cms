@@ -1,12 +1,16 @@
 /**
- * Created by sun on 2017/4/11.
+ * Created by vito on 2017/4/11.
  */
 import {
-    INCREMENT
+    SET_USERID,
+    SET_SESSIONID
 } from './mutation-types'
 
 export default {
-    [INCREMENT] (state) {
-        state.count ++;
+    [SET_USERID] (state, userId) {
+        state.userId = userId;
+    },
+    [SET_SESSIONID] (state, sessionId) {
+        state.sessionId = sessionId;
     }
 }

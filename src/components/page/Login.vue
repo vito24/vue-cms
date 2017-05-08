@@ -60,6 +60,8 @@
                             const data = res.data;
                             if (data.code === 1) {
                                 //登陆成功
+                                this.$store.commit('SET_USERID', data.obj.queryAdmin.adminId);
+                                this.$store.commit('SET_SESSIONID', data.obj.queryAdmin.sessionId);
                                 const obj = {
                                     userId: data.obj.queryAdmin.adminId,
                                     sessionId: data.obj.queryAdmin.sessionId,

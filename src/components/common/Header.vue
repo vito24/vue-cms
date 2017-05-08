@@ -131,6 +131,8 @@
                 if (name === 'changePsw') {
                     this.modalVisible = true;
                 } else {
+                    this.$store.commit('SET_USERID', '');
+                    this.$store.commit('SET_SESSIONID', '');
                     window.localStorage.removeItem('aijiaUserdata');
                     this.$router.push('/login');
                 }
@@ -160,6 +162,8 @@
                             const res = response.data;
                             if (res.code === 1) {
                                 this.$Message.success('修改密码成功!');
+                                this.$store.commit('SET_USERID', '');
+                                this.$store.commit('SET_SESSIONID', '');
                                 window.localStorage.removeItem('aijiaUserdata');
                                 this.$router.push('/login');
                             } else {
