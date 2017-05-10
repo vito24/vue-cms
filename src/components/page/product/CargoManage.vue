@@ -93,7 +93,6 @@
 
 <script>
     import MainLayout from '@/components/common/MainLayout'
-    import { mapState, mapMutations, mapActions } from 'vuex'
     export default {
         data () {
             return {
@@ -159,21 +158,7 @@
         components: {
             MainLayout
         },
-        computed: {
-//            ...mapState([
-//                'count'
-//            ]),
-//            test () {
-//                return this.count;
-//            }
-        },
         methods: {
-//            ...mapMutations([
-//                'INCREMENT'
-//            ]),
-//            ...mapActions([
-//               'add'
-//            ]),
             queryCargo () {
                 //获取货物列表
                 let params = {
@@ -194,11 +179,6 @@
             },
             search () {
                 this.queryCargo();
-//                this.INCREMENT()
-//                this.add()
-//                this.$store.dispatch('add').then(() => {
-//
-//                });
             },
             reset () {
                 this.queryParams = {};

@@ -15,7 +15,7 @@
                 </Menu-item>
                 <Dropdown placement="bottom-end" @on-click="handleClickDropdown" class="mr10">
                     <a href="javascript:void(0)">
-                        sunhan
+                        {{userInfo.username}}
                         <Icon type="arrow-down-b"></Icon>
                     </a>
                     <Dropdown-menu slot="list">
@@ -48,7 +48,7 @@
 
 <script>
     import siderbar from '@/config/sidebar';
-
+    import { mapState } from 'vuex'
     export default {
         name: 'header',
         data () {
@@ -106,6 +106,11 @@
         props: {
             activeKey: String
         },
+        computed: {
+            ...mapState([
+                'userInfo'
+            ])
+        },
         watch: {
             activeKey (val) {
                 this.currentActiveKey = val;
@@ -131,8 +136,7 @@
                 if (name === 'changePsw') {
                     this.modalVisible = true;
                 } else {
-                    this.$store.commit('SET_USERID', '');
-                    this.$store.commit('SET_SESSIONID', '');
+                    this.$store.commit('SET_USERINFO', '');
                     window.localStorage.removeItem('aijiaUserdata');
                     this.$router.push('/login');
                 }
@@ -162,8 +166,7 @@
                             const res = response.data;
                             if (res.code === 1) {
                                 this.$Message.success('修改密码成功!');
-                                this.$store.commit('SET_USERID', '');
-                                this.$store.commit('SET_SESSIONID', '');
+                                this.$store.commit('SET_USERINFO', '');
                                 window.localStorage.removeItem('aijiaUserdata');
                                 this.$router.push('/login');
                             } else {

@@ -13,9 +13,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 const myPlugin = store => {
     if (window.localStorage.aijiaUserdata) {
-        const userInfo = JSON.parse(window.localStorage.aijiaUserdata);
-        store.commit('SET_USERID', userInfo.userId);
-        store.commit('SET_SESSIONID', userInfo.sessionId);
+        store.commit('SET_USERINFO', JSON.parse(window.localStorage.aijiaUserdata));
     }
     // 当 store 初始化后调用
     store.subscribe((mutation, state) => {
@@ -26,8 +24,7 @@ const myPlugin = store => {
 
 export default new Vuex.Store({
     state: {
-        userId: '',
-        sessionId: ''
+        userInfo: ''
     },
     actions,
     getters,

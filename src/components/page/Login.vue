@@ -60,8 +60,6 @@
                             const data = res.data;
                             if (data.code === 1) {
                                 //登陆成功
-                                this.$store.commit('SET_USERID', data.obj.queryAdmin.adminId);
-                                this.$store.commit('SET_SESSIONID', data.obj.queryAdmin.sessionId);
                                 const obj = {
                                     userId: data.obj.queryAdmin.adminId,
                                     sessionId: data.obj.queryAdmin.sessionId,
@@ -70,6 +68,7 @@
                                     roleCode: data.obj.adminInfo && data.obj.adminInfo.roleCode,
                                     companyCode: data.obj.adminInfo && data.obj.adminInfo.companyCode
                                 };
+                                this.$store.commit('SET_USERINFO', obj);
                                 window.localStorage.setItem('aijiaUserdata', JSON.stringify(obj));
                                 this.$router.push('/home/index');
                             } else if (data.code === 20) {
