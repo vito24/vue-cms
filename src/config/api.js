@@ -3,6 +3,7 @@
  */
 import store from '@/store'
 import axios from 'axios'
+import bus from '@/config/bus'
 
 const getApi = (option) => {
     const userInfo = store.getters.userInfo;
@@ -14,7 +15,9 @@ const getApi = (option) => {
         method: option.method || 'get',
         url: url,
         data: option.data || {}
-    })
+    }).catch(error => {
+        bus.$Message.error('网络出错了~')
+    });
 };
 
 export default getApi;
