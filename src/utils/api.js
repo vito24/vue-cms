@@ -3,7 +3,7 @@
  */
 import store from '@/store'
 import axios from 'axios'
-import bus from '@/config/bus'
+import bus from '@/utils/bus'
 
 const getApi = (option) => {
     const userInfo = store.getters.userInfo;
