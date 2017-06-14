@@ -7,49 +7,49 @@
             <Breadcrumb-item>所有商品</Breadcrumb-item>
         </Breadcrumb>
         <div class="mt20">
-            <Form>
+            <Form ref="formCustom" :model="formCustom">
                 <Row :gutter="24">
                     <i-col span="6">
-                        <Form-item label="厂家型号" :label-width="80">
-                            <Input placeholder="请输入厂家型号" v-model="queryParams.factoryNumber"></Input>
+                        <Form-item label="厂家型号" :label-width="80" prop="factoryNumber">
+                            <Input placeholder="请输入厂家型号" v-model="formCustom.factoryNumber"></Input>
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="SPU编号" :label-width="80">
-                            <Input placeholder="请输入SPU编号" v-model="queryParams.spuId"></Input>
+                        <Form-item label="SPU编号" :label-width="80" prop="spuId">
+                            <Input placeholder="请输入SPU编号" v-model="formCustom.spuId"></Input>
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="SKU编号" :label-width="80">
-                            <Input placeholder="请输入SKU编号" v-model="queryParams.skuId"></Input>
+                        <Form-item label="SKU编号" :label-width="80" prop="skuId">
+                            <Input placeholder="请输入SKU编号" v-model="formCustom.skuId"></Input>
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="商品名称" :label-width="80">
-                            <Input placeholder="请输入商品名称" v-model="queryParams.name"></Input>
+                        <Form-item label="商品名称" :label-width="80" prop="name">
+                            <Input placeholder="请输入商品名称" v-model="formCustom.name"></Input>
                         </Form-item>
                     </i-col>
                 </Row>
                 <Row :gutter="24">
                     <i-col span="6">
-                        <Form-item label="艾佳售价" :label-width="80">
-                            <i-input placeholder="请输入最低价" v-model="queryParams.aijiaLowerPrice"></i-input>
+                        <Form-item label="艾佳售价" :label-width="80" prop="aijiaLowerPrice">
+                            <i-input placeholder="请输入最低价" v-model="formCustom.aijiaLowerPrice"></i-input>
                         </Form-item>
                     </i-col>
                     <i-col span="2">
                         <Form-item label="" :label-width="0" class="tc">-</Form-item>
                     </i-col>
                     <i-col span="4">
-                        <Form-item label="" :label-width="0">
-                            <i-input placeholder="请输入最高价" v-model="queryParams.aijiaUpperPrice"></i-input>
+                        <Form-item label="" :label-width="0" prop="aijiaUpperPrice">
+                            <i-input placeholder="请输入最高价" v-model="formCustom.aijiaUpperPrice"></i-input>
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="品牌&系列" :label-width="80">
+                        <Form-item label="品牌&系列" :label-width="80" prop="brand">
                             <Select
                                 placeholder="请选择"
-                                v-model="queryParams.brand"
-                                @on-change="handleSelectBrand(queryParams.brand)">
+                                v-model="formCustom.brand"
+                                @on-change="handleSelectBrand(formCustom.brand)">
                                 <Option
                                     :value="brand.brandDto.id"
                                     v-for="brand in brandList"
@@ -60,10 +60,10 @@
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="" :label-width="80">
+                        <Form-item label="" :label-width="80" prop="brand2">
                             <Select
                                 placeholder="请选择"
-                                v-model="queryParams.brand2"
+                                v-model="formCustom.brand2"
                                 v-show="brand2List.length">
                                 <Option
                                     :value="brand2.brandDto.id"
@@ -77,11 +77,11 @@
                 </Row>
                 <Row :gutter="24">
                     <i-col span="6">
-                        <Form-item label="类目" :label-width="80">
+                        <Form-item label="类目" :label-width="80" prop="type">
                             <Select
                                 placeholder="请选择"
-                                v-model="queryParams.type"
-                                @on-change="handleSelectType(queryParams.type)">
+                                v-model="formCustom.type"
+                                @on-change="handleSelectType(formCustom.type)">
                                 <Option
                                     :value="item.categoryDto.id"
                                     v-for="item in categoryList"
@@ -92,11 +92,11 @@
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="" :label-width="80">
+                        <Form-item label="" :label-width="80" prop="type2">
                             <Select
                                 placeholder="请选择"
-                                v-model="queryParams.type2"
-                                @on-change="handleSelectType2(queryParams.type2)"
+                                v-model="formCustom.type2"
+                                @on-change="handleSelectType2(formCustom.type2)"
                                 v-show="category2List.length">
                                 <Option
                                     :value="item.categoryDto.id"
@@ -108,10 +108,10 @@
                         </Form-item>
                     </i-col>
                     <i-col span="6">
-                        <Form-item label="" :label-width="80">
+                        <Form-item label="" :label-width="80" prop="type3">
                             <Select
                                 placeholder="请选择"
-                                v-model="queryParams.type3"
+                                v-model="formCustom.type3"
                                 v-show="category3List.length">
                                 <Option
                                     :value="item.categoryDto.id"
@@ -124,7 +124,7 @@
                     </i-col>
                     <i-col span="6" class="tr">
                         <Form-item>
-                            <Button @click="reset">清空</Button>
+                            <Button @click="handleReset('formCustom')">清空</Button>
                             <Button type="primary" @click="search">搜索</Button>
                         </Form-item>
                     </i-col>
@@ -167,8 +167,19 @@
                 self: this,
                 pageNo: 1,
                 pageSize: 30,
-                queryParams: {
+                formCustom: {
                     //查询参数
+                    factoryNumber: '',
+                    spuId: '',
+                    skuId: '',
+                    name: '',
+                    aijiaLowerPrice: '',
+                    aijiaUpperPrice: '',
+                    brand: '',
+                    brand2: '',
+                    type: '',
+                    type2: '',
+                    type3: ''
                 },
                 categoryList: [],  //一级类目
                 category2List: [],  //二级类目
@@ -263,18 +274,17 @@
 
         },
         methods: {
-            reset () {
-                //清空
-                this.queryParams = {};
+            handleReset (name) {
+                this.$refs[name].resetFields();
             },
             search () {
                 //搜索
                 this.queryProduct();
-                console.log('search', this.queryParams);
+                console.log('search', this.formCustom);
             },
             handleClickTab (status) {
                 //切换tab
-                this.queryParams.status = status;
+                this.formCustom.status = status;
                 this.queryProduct();
             },
             handleEdit (index, row) {
@@ -291,23 +301,23 @@
             },
             queryProduct () {
                 //获取商品列表
-                const queryParams = this.queryParams;
+                const formCustom = this.formCustom;
                 let params = {
                     page: this.pageNo,
                     size: this.pageSize,
                     searchGoodsesConditionVo: {
-                        spuId: queryParams.spuId || null,
-                        name: queryParams.name || null,
-                        aijiaLowerPrice: queryParams.aijiaLowerPrice || null,
-                        aijiaUpperPrice: queryParams.aijiaUpperPrice || null,
-                        typeOneId: queryParams.type || null,
-                        typeTwoId: queryParams.type2 || null,
-                        typeThreeId: queryParams.type3 || null,
-                        brandIdOne: queryParams.brand || null,
-                        brandIdTwo: queryParams.brand2 || null,
-                        factoryNumber: queryParams.factoryNumber || null,
-                        skuId: queryParams.skuId || null,
-                        status: queryParams.status || null
+                        spuId: formCustom.spuId || null,
+                        name: formCustom.name || null,
+                        aijiaLowerPrice: formCustom.aijiaLowerPrice || null,
+                        aijiaUpperPrice: formCustom.aijiaUpperPrice || null,
+                        typeOneId: formCustom.type || null,
+                        typeTwoId: formCustom.type2 || null,
+                        typeThreeId: formCustom.type3 || null,
+                        brandIdOne: formCustom.brand || null,
+                        brandIdTwo: formCustom.brand2 || null,
+                        factoryNumber: formCustom.factoryNumber || null,
+                        skuId: formCustom.skuId || null,
+                        status: formCustom.status || null
                     }
                 };
                 this.$http({
